@@ -1,3 +1,4 @@
+package game;
 
 public class Board {
     private final int WIDTH = 7;

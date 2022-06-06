@@ -1,3 +1,4 @@
+package game;
 import java.util.Random;
 
 public final class Game {
