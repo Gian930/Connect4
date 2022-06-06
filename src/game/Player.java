@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Player {
 	
+	private static Scanner scanner = new Scanner(System.in);
     private String name;
     
     public Player() {
@@ -19,12 +20,12 @@ public class Player {
     }
 
     public void setNameFromInput() {
-        Scanner scanner = new Scanner(System.in);
+        
         String name = scanner.nextLine();
-        scanner.close();
         this.setName(name);
-
     }
+    
+    
 
     @Override
     public String toString() {
