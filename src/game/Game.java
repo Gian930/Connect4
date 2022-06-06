@@ -15,7 +15,9 @@ public final class Game {
     
 
     public void setUp() {
-    	System.out.print("Choose red player name: ");
+    	System.out.print("Choose red player name ciao: ");
+    	int variabile= 4;
+    	variabile++;
     	this.redPlayer.setNameFromInput();
     	System.out.print("Choose yellow player name: ");
     	this.yellowPlayer.setNameFromInput();
