@@ -1,11 +1,22 @@
 package game;
 
 public class Board {
-    private final int WIDTH = 7;
-    private final int HEIGHT = 6;
+	
+    private final static int WIDTH = 7;
+    private final static int HEIGHT = 6;
     private Piece[][] pieces = new Piece[HEIGHT][WIDTH];
     
-    public Board() {
+    
+    
+    public static int getWidth() {
+		return WIDTH;
+	}
+
+	public static int getHeight() {
+		return HEIGHT;
+	}
+
+	public Board() {
         for(int y=0; y<HEIGHT; y++){
             for(int x=0; x<WIDTH; x++) {
                 this.pieces[y][x] = Piece.EMPTY;
@@ -20,6 +31,18 @@ public class Board {
     		}
     	}
     	return true;
+    }
+    
+    public boolean isColumnFull(Integer playerInput) {
+    	return this.pieces[0][playerInput-1] != Piece.EMPTY;
+    }
+    
+    public void makeMove(Integer playerInput, Piece turn) {
+    	
+    }
+    
+    public void isFinished() {
+    	
     }
 
     @Override

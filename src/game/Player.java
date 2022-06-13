@@ -19,8 +19,7 @@ public class Player {
         this.name = name;
     }
 
-    public void setNameFromInput() {
-        
+    public void setNameFromInput() {       
         String name = scanner.nextLine();
         this.setName(name);
     }

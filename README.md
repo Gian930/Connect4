@@ -1,3 +1,3 @@
 # Progetto__Java
 
-- [ ] spiega cose statiches
+- [ ] spiega cose statiche
