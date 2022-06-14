@@ -8,8 +8,7 @@ public class Main {
         Player winner = game.run();
         if(winner==null) {
             System.out.println("It's a draw.");
-        }
-        else {
+        } else {
             System.out.println("Congratulations "+winner+", you win the game.");
         }
 	}

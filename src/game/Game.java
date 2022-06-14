@@ -40,9 +40,6 @@ public final class Game {
     		this.board.makeMove(playerInput, turn);
     		Game.clearScreen();
     		this.board.isFinished();
-    		//prendere input player
-    		//aggiornare board con input
-    		//controllare se c'è il vincitore
     		isRedTurn = !isRedTurn;
     	}
         return winner;
@@ -54,7 +51,7 @@ public final class Game {
     }
     
     private static void clearScreen() {
-    	for (int i = 0; i < 50; ++i) System.out.println();
+    	for (int i = 0; i < 50; i++) System.out.println();
     }
     
     private int chooseMove() {

@@ -7,7 +7,6 @@ public class Board {
     private Piece[][] pieces = new Piece[HEIGHT][WIDTH];
     
     
-    
     public static int getWidth() {
 		return WIDTH;
 	}
@@ -38,7 +37,12 @@ public class Board {
     }
     
     public void makeMove(Integer playerInput, Piece turn) {
-    	
+    	for(int row = 5; row >= 0; row--) {
+    		if(this.pieces[row][playerInput-1] == Piece.EMPTY) {
+    			this.pieces[row][playerInput-1] = turn;
+    			break;
+    		}
+    	}
     }
     
     public void isFinished() {
