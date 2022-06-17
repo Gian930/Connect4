@@ -28,6 +28,7 @@ public final class Game {
     	boolean isRedTurn = this.chooseFirstPlayer();
     	Piece turn;
     	while(winner == null && !this.board.isFilled()) {
+    		Game.clearScreen();
     		System.out.println(this.board);
     		if(isRedTurn) {
     			System.out.print(this.redPlayer.getName()+"'s turn. ");
@@ -38,8 +39,7 @@ public final class Game {
     		}
     		int playerInput = this.chooseMove();
     		this.board.makeMove(playerInput, turn);
-    		Game.clearScreen();
-    		this.board.isFinished();
+    		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer);
     		isRedTurn = !isRedTurn;
     	}
         return winner;

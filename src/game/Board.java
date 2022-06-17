@@ -37,7 +37,7 @@ public class Board {
     }
     
     public void makeMove(Integer playerInput, Piece turn) {
-    	for(int row = 5; row >= 0; row--) {
+    	for(int row = HEIGHT-1; row >= 0; row--) {
     		if(this.pieces[row][playerInput-1] == Piece.EMPTY) {
     			this.pieces[row][playerInput-1] = turn;
     			break;
@@ -45,8 +45,114 @@ public class Board {
     	}
     }
     
-    public void isFinished() {
+    public Player checkWinner(Player redPlayer, Player yellowPlayer) {
+    	Player winner;
+    	Piece color;
+    	color = this.checkHorizontal();
+    	winner = checkColor(redPlayer, yellowPlayer, color);
+    	if(winner != null) {
+    		return winner;
+    	}
+    	color = this.checkVertical();
+    	winner = checkColor(redPlayer, yellowPlayer, color);
+    	if(winner != null) {
+    		return winner;
+    	}
+    	color = this.checkDiagonal();
+    	winner = checkColor(redPlayer, yellowPlayer, color);
+    	if(winner != null) {
+    		return winner;
+    	}
+    	return null;
     	
+    	
+    }
+    
+    private Piece checkHorizontal() {
+    	for(int c1 = 0; c1 < 4; c1++) {
+    		int c2 = c1 ++;
+    		int c3 = c2++;
+    		int c4 = c3++;
+    		for(int r = 0; r < HEIGHT; r++) {
+    			if(this.pieces[r][c1] != Piece.EMPTY && checkEquals(
+					this.pieces[r][c1],
+					this.pieces[r][c2],
+					this.pieces[r][c3],
+					this.pieces[r][c4]
+					
+				)) {
+    				Piece color = this.pieces[r][c1];
+    				return color;   				
+    			}
+    		}
+    	}
+    	return null;
+    }
+    
+    private Piece checkVertical() {
+    	for(int r1 = 0; r1 < 3; r1++) {
+    		int r2 = r1 ++;
+    		int r3 = r2++;
+    		int r4 = r3++;
+    		for(int c = 0; c < WIDTH; c++) {
+    			if(this.pieces[r1][c] != Piece.EMPTY && checkEquals(
+					this.pieces[r1][c],
+					this.pieces[r2][c],
+					this.pieces[r3][c],
+					this.pieces[r4][c]
+					
+				)) {
+    				Piece color = this.pieces[r1][c];
+    				return color;   				
+    			}
+    		}
+    	}
+    	return null;
+    }
+    
+    private Piece checkFirstDiagonal() {
+    	for(int i1 = 0; i1 < 3; i1++) {
+    		int i2 = i1 ++;
+    		int i3 = i2++;
+    		int i4 = i3++;
+    		for(int j1 = 0; j1 < 3; j1++) {
+        		int j2 = j1 ++;
+        		int j3 = j2++;
+        		int j4 = j3++;
+				if(this.pieces[i1][j1] != Piece.EMPTY && checkEquals(
+					this.pieces[i1][j1],
+					this.pieces[i2][j2],
+					this.pieces[i3][j3],
+					this.pieces[i4][j4]
+					
+				)) {
+    				Piece color = this.pieces[i1][j1];
+    				return color;   				
+    			}
+    		}
+    	}
+    	return null;
+    }
+    
+    private Piece checkSecondDiagonal() {
+    	
+    }
+    
+    
+    private boolean checkEquals(Piece piece1, Piece piece2, Piece piece3, Piece piece4) {
+    	return piece1==piece2 && piece2==piece3 && piece3==piece4;
+    }
+    
+    private Player checkColor(Player redPlayer, Player yellowPlayer, Piece color) {
+    	if(color != null) {
+    		if(color == Piece.RED) {
+    			return redPlayer;
+    		} else {
+    			return yellowPlayer;
+    		}
+    	} else {
+    		return null;
+    	}
     }
 
     @Override
