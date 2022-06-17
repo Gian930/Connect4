@@ -48,24 +48,31 @@ public class Board {
     public Player checkWinner(Player redPlayer, Player yellowPlayer) {
     	Player winner;
     	Piece color;
+    	
     	color = this.checkHorizontal();
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
+    	
     	color = this.checkVertical();
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
-    	color = this.checkDiagonal();
+    	
+    	color = this.checkFirstDiagonal();
+    	winner = checkColor(redPlayer, yellowPlayer, color);
+    	if(winner != null) {
+    		return winner;
+    	}
+    	
+    	color = this.checkSecondDiagonal();
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
     	return null;
-    	
-    	
     }
     
     private Piece checkHorizontal() {
