@@ -42,6 +42,8 @@ public final class Game {
     		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer);
     		isRedTurn = !isRedTurn;
     	}
+    	Game.clearScreen();
+    	System.out.println(this.board);
         return winner;
     }
     

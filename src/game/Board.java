@@ -142,7 +142,27 @@ public class Board {
     }
     
     private Piece checkSecondDiagonal() {
-    	
+    	for(int i1 = 0; i1 < 3; i1++) {
+    		int i2 = i1 ++;
+    		int i3 = i2++;
+    		int i4 = i3++;
+    		for(int j1 = 6; j1 > 2 ; j1--) {
+        		int j2 = j1--;
+        		int j3 = j2--;
+        		int j4 = j3--;
+				if(this.pieces[i1][j1] != Piece.EMPTY && checkEquals(
+					this.pieces[i1][j1],
+					this.pieces[i2][j2],
+					this.pieces[i3][j3],
+					this.pieces[i4][j4]
+					
+				)) {
+    				Piece color = this.pieces[i1][j1];
+    				return color;   				
+    			}
+    		}
+    	}
+    	return null;
     }
     
     
