@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 public class Board {
 	
     private final static int WIDTH = 7;
@@ -22,6 +24,15 @@ public class Board {
             }
         }
     }
+	
+	public Board(ArrayList<String> lines) {
+		for(int y=0; y<HEIGHT; y++) {
+			String line = lines.get(y);
+			for(int x=0; x<WIDTH; x++) {
+				this.pieces[y][x]=Piece.fromCharacter(line.charAt(x));
+			}
+		}
+	}
     
     public boolean isFilled() {
     	for(int x=0; x<WIDTH; x++) {
@@ -61,13 +72,13 @@ public class Board {
     		return winner;
     	}
     	
-    	color = this.checkFirstDiagonal();
+    	color = this.checkDiagonal();
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
     	
-    	color = this.checkSecondDiagonal();
+    	color = this.checkAntiDiagonal();
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
@@ -117,12 +128,12 @@ public class Board {
     	return null;
     }
     
-    private Piece checkFirstDiagonal() {
+    private Piece checkDiagonal() {
     	for(int i1 = 0; i1 < 3 ; i1++) {
     		int i2 = i1+1;
     		int i3 = i1+2;
     		int i4 = i1+3;
-    		for(int j1 = 0; j1 < 3; j1++) {
+    		for(int j1 = 0; j1 < 4; j1++) {
         		int j2 = j1+1;
         		int j3 = j1+2;
         		int j4 = j3+3;
@@ -141,7 +152,7 @@ public class Board {
     	return null;
     }
     
-    private Piece checkSecondDiagonal() {
+    private Piece checkAntiDiagonal() {
     	for(int i1 = 0; i1 < 3; i1++) {
     		int i2 = i1+1;
     		int i3 = i1+2;
@@ -181,25 +192,15 @@ public class Board {
     		return null;
     	}
     }
+    
+    
 
     @Override
     public String toString() {
         StringBuilder outputString = new StringBuilder();
         for(int y=0; y<HEIGHT; y++){
             for(int x=0; x<WIDTH; x++) {
-                switch(this.pieces[y][x]) {
-                    case YELLOW:
-                        outputString.append("Y");
-                        break;
-                    case RED:
-                        outputString.append("R");
-                        break;
-                    case EMPTY:
-                        outputString.append("E");
-                        break;
-                    default:
-                        break;
-                }
+                outputString.append(this.pieces[y][x]);
             }
             outputString.append("\n");
         }
