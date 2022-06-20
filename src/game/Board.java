@@ -77,9 +77,9 @@ public class Board {
     
     private Piece checkHorizontal() {
     	for(int c1 = 0; c1 < 4; c1++) {
-    		int c2 = c1 ++;
-    		int c3 = c2++;
-    		int c4 = c3++;
+    		int c2 = c1+1; 
+    		int c3 = c1+2;
+    		int c4 = c1+3;
     		for(int r = 0; r < HEIGHT; r++) {
     			if(this.pieces[r][c1] != Piece.EMPTY && checkEquals(
 					this.pieces[r][c1],
@@ -98,9 +98,9 @@ public class Board {
     
     private Piece checkVertical() {
     	for(int r1 = 0; r1 < 3; r1++) {
-    		int r2 = r1 ++;
-    		int r3 = r2++;
-    		int r4 = r3++;
+    		int r2 = r1+1;
+    		int r3 = r1+2;
+    		int r4 = r1+3;
     		for(int c = 0; c < WIDTH; c++) {
     			if(this.pieces[r1][c] != Piece.EMPTY && checkEquals(
 					this.pieces[r1][c],
@@ -118,14 +118,14 @@ public class Board {
     }
     
     private Piece checkFirstDiagonal() {
-    	for(int i1 = 0; i1 < 3; i1++) {
-    		int i2 = i1 ++;
-    		int i3 = i2++;
-    		int i4 = i3++;
+    	for(int i1 = 0; i1 < 3 ; i1++) {
+    		int i2 = i1+1;
+    		int i3 = i1+2;
+    		int i4 = i1+3;
     		for(int j1 = 0; j1 < 3; j1++) {
-        		int j2 = j1 ++;
-        		int j3 = j2++;
-        		int j4 = j3++;
+        		int j2 = j1+1;
+        		int j3 = j1+2;
+        		int j4 = j3+3;
 				if(this.pieces[i1][j1] != Piece.EMPTY && checkEquals(
 					this.pieces[i1][j1],
 					this.pieces[i2][j2],
@@ -143,13 +143,13 @@ public class Board {
     
     private Piece checkSecondDiagonal() {
     	for(int i1 = 0; i1 < 3; i1++) {
-    		int i2 = i1 ++;
-    		int i3 = i2++;
-    		int i4 = i3++;
+    		int i2 = i1+1;
+    		int i3 = i1+2;
+    		int i4 = i1+3;
     		for(int j1 = 6; j1 > 2 ; j1--) {
-        		int j2 = j1--;
-        		int j3 = j2--;
-        		int j4 = j3--;
+        		int j2 = j1-1;
+        		int j3 = j1-2;
+        		int j4 = j1-3;
 				if(this.pieces[i1][j1] != Piece.EMPTY && checkEquals(
 					this.pieces[i1][j1],
 					this.pieces[i2][j2],
