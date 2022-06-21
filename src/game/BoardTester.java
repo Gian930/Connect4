@@ -3,6 +3,11 @@ package game;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class BoardTester it's used for testing the program.
+ * @author Gianmarco Caldaroni.
+ *
+ */
 public class BoardTester {
 	
 	public static void test() {

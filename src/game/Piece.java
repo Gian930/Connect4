@@ -1,15 +1,32 @@
 package game;
 
+
+/**
+ * Pieces that can be in the board.
+ * @author Gianmarco Caldaroni.
+ *
+ */
 public enum Piece {
 	
+	/**
+	 * The yellow piece.
+	 */
     YELLOW,
+    
+    /**
+     * The red piece.
+     */
     RED,
+    
+    /**
+     * An empty piece.
+     */
     EMPTY;
     
-    // private Piece() {
-
-    // }
-	
+	/**
+	 * @param character
+	 * @return yellow, red of empty based on what character is in the board.
+	 */
 	public static Piece fromCharacter(char character) {
 		switch(character) {
 			case 'X':
@@ -22,6 +39,11 @@ public enum Piece {
 				return null;
 		}
 	}
+	
+	/**
+	 * Override the toString method of the Object superclass.
+	 * @return "X", "O" or " " depending in what case we are.
+	 */
 	@Override
 	public String toString() {
 		switch(this) {
@@ -32,7 +54,8 @@ public enum Piece {
 	        case EMPTY:
 	            return " ";
 	        default:
-	            return null; //Never happens.
+	        	//Never happens.
+	            return null; 
 		}
 	}
 

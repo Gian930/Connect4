@@ -1,10 +1,11 @@
 package game;
+
 import java.util.Random;
 import java.util.Scanner;
 
 /**
- * This Game it's used to initialize a new Connect 4 game.
- * @author Gianmarco Caldaroni
+ * This class Game it's used to initialize a new Connect 4 game.
+ * @author Gianmarco Caldaroni.
  *
  */
 public final class Game {
@@ -30,7 +31,7 @@ public final class Game {
     private Board board;
     
     /**
-     * The constructor for class Game.
+     * The constructor.
      */
     public Game() {
     	this.redPlayer = new Player();
@@ -50,14 +51,13 @@ public final class Game {
     
     /**
      * Run a new game.
-     * @return winner: initialized to null, becomes the first player who connected four pieces of the same color;
-     * so if there isn't a winner, this method return null witch means it's a draw.
+     * @return winner the winner of the game or, if it's a draw, null.
      * 
      */
     public Player run() {
     	Player winner = null;
     	boolean isRedTurn = this.chooseFirstPlayer();
-    	//Initialize turn: an instance of type Piece
+    	//Initialize turn: an instance of type Piece.
     	Piece turn;
     	//If the board is filled the game is finished and there isn't a winner, so it's a draw.
     	while(winner == null && !this.board.isFilled()) {
@@ -85,8 +85,8 @@ public final class Game {
     }
     
     /**
-     * There isn't an official way to determine a first player, so I decide to choose it randomly.
-     * @return randomBooleanGenerator: can be true (so it's the first player) or false (it's not).
+     * Choose the first player.
+     * @return true (so it's the first player) or false (it's not).
      */
     private boolean chooseFirstPlayer() {
     	Random randomBooleanGenerator = new Random(); 
@@ -102,9 +102,8 @@ public final class Game {
     
     /**
      * The player chooses a number to put it on the board.
-     * @exception NumberFormatException: indicate that the application has attempted to convert a string 
-     * to one of the numeric types, but that string does't have the appropriate format. 
-     * @return playerInput: a number taken from input by the player.
+     * @exception NumberFormatException: the string doesn't have the appropriate format.
+     * @return playerInput a number taken from input by the player.
      */
     private int chooseMove() {
     	//Integer because we can convert playerInput from null to integer.
@@ -128,9 +127,9 @@ public final class Game {
     }
     
     /**
-     * Check if playerInput is valid: if it's between 1 and 7 and then if the chosen number isn't the same of a full column. 
-     * @param playerInput: a number taken from input.
-     * @return boolean: true or false.
+     * Check if playerInput is valid.
+     * @param playerInput a number taken from input.
+     * @return true if playerInput is valid and false otherwise.
      */
     private boolean isValidInput(Integer playerInput) {
     	return playerInput >= 1 && playerInput <= Board.getWidth() && !this.board.isColumnFull(playerInput);

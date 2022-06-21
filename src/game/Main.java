@@ -10,7 +10,7 @@ public class Main {
 
 	/**
 	 * The main method of the project.
-	 * @param args: an array of command-line arguments for the application
+	 * @param args an array of command-line arguments for the application.
 	 */
 	public static void main(String[] args) {
 		Game game = new Game();
