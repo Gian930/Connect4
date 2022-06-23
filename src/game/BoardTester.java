@@ -33,13 +33,10 @@ public class BoardTester {
 	}
 	
 	/**
-	 * Check if there is a winner from all the status of the board taken from input.   
-	 * @param strings first status test.
-	 * @param strings2 second status test.
-	 * @param strings3 third status test.
-	 * @param strings4 fourth status test.
+	 * Check if there is a winner from all the status of the board taken from input.  
+	 * @param strings: the status of the board.
 	 */
-	private static void isPassed(String[] strings, String[] strings2, String[] strings3, String[] strings4) {
+	private static void isPassed(String[] strings) {
 		
 		Player player1 = new Player();
 		Player player2 = new Player();
@@ -49,44 +46,11 @@ public class BoardTester {
 		//Put the list in the board.
 		Board board = new Board(new ArrayList<String>(lines));
 		
-		List<String> lines2 =  Arrays.asList(strings2);
-		Board board2 = new Board(new ArrayList<String>(lines2));
-		
-		List<String> lines3 =  Arrays.asList(strings3);
-		Board board3 = new Board(new ArrayList<String>(lines3));
-		
-		List<String> lines4 =  Arrays.asList(strings4);
-		Board board4 = new Board(new ArrayList<String>(lines4));
-		
-		/**
-		 * Using Board method checkWinner to see if the tests passed or not.
-		 * For convenience, in the tests, player1 is always the winner.
-		 */
-		System.out.println(board.checkWinner(player1, player2) == player1 ? "PASSED" : "FAILED");
-		
-		System.out.println(board2.checkWinner(player1, player2) == player1 ? "PASSED" : "FAILED");
-		
-		System.out.println(board3.checkWinner(player1, player2) == player1 ? "PASSED" : "FAILED");
-		
-		System.out.println(board4.checkWinner(player1, player2) == player1 ? "PASSED" : "FAILED");
-		
+		//For convenience player1 is always the winner and null it's for draw test case.
+		System.out.println(
+		   board.checkWinner(player1, player2) == player1 || board.checkWinner(player1, player2) ==  null ? "PASSED" : "FAILED");
 	}
 	
-	/**
-	 * Overload isPassed method for draw test.
-	 * @param strings draw status test.
-	 */
-	private static void isPassed(String[] strings) {
-			
-			Player player1 = new Player();
-			Player player2 = new Player();
-			
-			List<String> lines =  Arrays.asList(strings);
-			Board board = new Board(new ArrayList<String>(lines));
-			
-			System.out.println(board.checkWinner(player1, player2) == null ? "PASSED" : "FAILED");
-			
-		}
 	
 	/**
 	 * Horizontal test cases.
@@ -129,7 +93,10 @@ public class BoardTester {
 				"  XXXOX"
 		};
 		
-		BoardTester.isPassed(strings, strings2, strings3, strings4);
+		BoardTester.isPassed(strings);
+		BoardTester.isPassed(strings2);
+		BoardTester.isPassed(strings3);
+		BoardTester.isPassed(strings4);
 		
 	}
 	
@@ -174,7 +141,10 @@ public class BoardTester {
 				"  OXXXO"
 		};
 		
-		BoardTester.isPassed(strings, strings2, strings3, strings4);
+		BoardTester.isPassed(strings);
+		BoardTester.isPassed(strings2);
+		BoardTester.isPassed(strings3);
+		BoardTester.isPassed(strings4);
 		
 	}
 	
@@ -219,7 +189,10 @@ public class BoardTester {
 				"XOXOXXO"
 		};
 		
-		BoardTester.isPassed(strings, strings2, strings3, strings4);
+		BoardTester.isPassed(strings);
+		BoardTester.isPassed(strings2);
+		BoardTester.isPassed(strings3);
+		BoardTester.isPassed(strings4);
 		
 	}
 	
@@ -264,7 +237,10 @@ public class BoardTester {
 				"   XXOO"
 		};
 		
-		BoardTester.isPassed(strings, strings2, strings3, strings4);
+		BoardTester.isPassed(strings);
+		BoardTester.isPassed(strings2);
+		BoardTester.isPassed(strings3);
+		BoardTester.isPassed(strings4);
 		
 	}
 	
