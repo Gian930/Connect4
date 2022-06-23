@@ -136,6 +136,7 @@ public class Board {
     	if(winner != null) {
     		return winner;
     	}
+    	
     	return null;
     }
     
@@ -293,9 +294,9 @@ public class Board {
             outputString.append("\n");
         }
         outputString.append(
-        		"╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n"
-        		+ "║ 1 ║ 2 ║ 3 ║ 4 ║ 5 ║ 6 ║ 7 ║\n"
-        		+ "╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
+        	  "╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n"
+    		+ "║ 1 ║ 2 ║ 3 ║ 4 ║ 5 ║ 6 ║ 7 ║\n"
+    		+ "╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
 		);
         return outputString.toString();
     }

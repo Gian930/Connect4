@@ -22,9 +22,7 @@ public class Player {
     /**
      * The constructor.
      */
-    public Player() {
-    	
-    }
+    public Player() { }
 
     /**
      * Get the name of the player.
