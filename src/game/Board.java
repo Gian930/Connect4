@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 
 /**
- * This class Board it's used to set a new board, with its methods.
+ * This class Board it's used to set a new board.
  * @author Gianmarco Caldaroni.
  *
  */
@@ -107,7 +107,7 @@ public class Board {
      * Check if there is a winner.
      * @param redPlayer
      * @param yellowPlayer
-     * @return winner it's the red or yellow player if there are four pieces connected of that color, null otherwise.
+     * @return winner: the red or yellow player if there are four pieces connected of that color, null otherwise.
      */
     public Player checkWinner(Player redPlayer, Player yellowPlayer) {
     	Player winner;
@@ -201,7 +201,7 @@ public class Board {
     		for(int j1 = 0; j1 < 4; j1++) {
         		int j2 = j1+1;
         		int j3 = j1+2;
-        		int j4 = j3+3;
+        		int j4 = j1+3;
 				if(this.pieces[i1][j1] != Piece.EMPTY && checkEquals(
 					this.pieces[i1][j1],
 					this.pieces[i2][j2],
@@ -251,7 +251,7 @@ public class Board {
      * @param piece2
      * @param piece3
      * @param piece4
-     * @return true if the four pieces are equals and false otherwise.
+     * @return true if they're equals and false otherwise.
      */
     private boolean checkEquals(Piece piece1, Piece piece2, Piece piece3, Piece piece4) {
     	//If this chain of compare it's true, for transitivity, there's no point to write piece1==piece4, because it's always true.

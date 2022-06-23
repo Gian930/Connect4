@@ -51,7 +51,7 @@ public final class Game {
     
     /**
      * Run a new game.
-     * @return winner the winner of the game or, if it's a draw, null.
+     * @return winner of the game or, if it's a draw, null.
      * 
      */
     public Player run() {
@@ -101,7 +101,7 @@ public final class Game {
     }
     
     /**
-     * The player chooses a number to put it on the board.
+     * The player chooses a number to put on the board.
      * @exception NumberFormatException: the string doesn't have the appropriate format.
      * @return playerInput a number taken from input by the player.
      */
@@ -127,7 +127,7 @@ public final class Game {
     }
     
     /**
-     * Check if playerInput is valid.
+     * Check if playerInput is a valid number.
      * @param playerInput a number taken from input.
      * @return true if playerInput is valid and false otherwise.
      */

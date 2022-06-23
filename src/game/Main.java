@@ -10,9 +10,10 @@ public class Main {
 
 	/**
 	 * The main method of the project.
-	 * @param args an array of command-line arguments for the application.
+	 * @param args
 	 */
 	public static void main(String[] args) {
+		BoardTester.test();
 		Game game = new Game();
         game.setUp();
         Player winner = game.run();

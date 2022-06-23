@@ -25,7 +25,7 @@ public enum Piece {
     
 	/**
 	 * @param character
-	 * @return yellow, red of empty based on what character is in the board.
+	 * @return yellow, red or empty based on what character is in the board.
 	 */
 	public static Piece fromCharacter(char character) {
 		switch(character) {
