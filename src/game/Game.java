@@ -126,12 +126,14 @@ public final class Game {
     	return playerInput;	
     }
     
+    
+    
     /**
      * Check if playerInput is a valid number.
      * @param playerInput a number taken from input.
      * @return true if playerInput is valid and false otherwise.
      */
-    private boolean isValidInput(Integer playerInput) {
+    public boolean isValidInput(Integer playerInput) {
     	return playerInput >= 1 && playerInput <= Board.getWidth() && !this.board.isColumnFull(playerInput);
     }
       
