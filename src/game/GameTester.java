@@ -76,7 +76,6 @@ public class GameTester {
      */
 	private static void testWrongInput() {
 		
-		GameTester.isPassed(null);
 		GameTester.isPassed("10");
 		GameTester.isPassed("-3");
 		GameTester.isPassed("a");

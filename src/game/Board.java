@@ -255,7 +255,7 @@ public class Board {
      * @return true if they're equals and false otherwise.
      */
     private boolean checkEquals(Piece piece1, Piece piece2, Piece piece3, Piece piece4) {
-    	//If this chain of compare it's true, for transitivity, there's no point to write piece1==piece4, because it's always true.
+    	//If this it's true, for transitivity, there's no point to write piece1==piece4.
     	return piece1==piece2 && piece2==piece3 && piece3==piece4;
     }
     
