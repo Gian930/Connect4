@@ -15,6 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		BoardTester.test();
 		GameTester.test();
+		WinningSequenceTester.test();
 		Game game = new Game();
         game.setUp();
         Player winner = game.run();

@@ -109,29 +109,30 @@ public class Board {
      * @param yellowPlayer
      * @return winner: the red or yellow player if there are four pieces connected of that color, null otherwise.
      */
-    public Player checkWinner(Player redPlayer, Player yellowPlayer) {
+    public Player checkWinner(Player redPlayer, Player yellowPlayer, WinningSequence winningSequence) {
     	Player winner;
     	Piece color;
     	
-    	color = this.checkHorizontal();
+    	
+    	color = this.checkHorizontal(winningSequence);
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
     	
-    	color = this.checkVertical();
+    	color = this.checkVertical(winningSequence);
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
     	
-    	color = this.checkDiagonal();
+    	color = this.checkDiagonal(winningSequence);
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
     	}
     	
-    	color = this.checkAntiDiagonal();
+    	color = this.checkAntiDiagonal(winningSequence);
     	winner = checkColor(redPlayer, yellowPlayer, color);
     	if(winner != null) {
     		return winner;
@@ -144,12 +145,13 @@ public class Board {
 	 * Check the horizontal pieces.
 	 * @return color if there is four horizontal pieces of the same color, null otherwise.
 	 */
-    private Piece checkHorizontal() {
+    private Piece checkHorizontal(WinningSequence winningSequence) {
     	for(int c1 = 0; c1 < 4; c1++) {
     		int c2 = c1+1; 
     		int c3 = c1+2;
     		int c4 = c1+3;
     		for(int r = 0; r < HEIGHT; r++) {
+    			
     			if(this.pieces[r][c1] != Piece.EMPTY && checkEquals(
 					this.pieces[r][c1],
 					this.pieces[r][c2],
@@ -157,7 +159,19 @@ public class Board {
 					this.pieces[r][c4]
 					
 				)) {
+    				Coordinates first = new Coordinates(c1,r);
+    				Coordinates second = new Coordinates(c2,r);
+    				Coordinates third = new Coordinates(c3,r);
+    				Coordinates fourth = new Coordinates(c4,r);
+    				
     				Piece color = this.pieces[r][c1];
+    				
+    				winningSequence.setFirst(first);
+    				winningSequence.setSecond(second);
+    				winningSequence.setThird(third);
+    				winningSequence.setFourth(fourth);
+    				winningSequence.setPiece(color);
+    				
     				return color;   				
     			}
     		}
@@ -169,7 +183,7 @@ public class Board {
 	 * Check the vertical pieces.
 	 * @return color if there is four vertical pieces of the same color, null otherwise.
 	 */
-    private Piece checkVertical() {
+    private Piece checkVertical(WinningSequence winningSequence) {
     	for(int r1 = 0; r1 < 3; r1++) {
     		int r2 = r1+1;
     		int r3 = r1+2;
@@ -182,7 +196,19 @@ public class Board {
 					this.pieces[r4][c]
 					
 				)) {
+    				Coordinates first = new Coordinates(r1,c);
+    				Coordinates second = new Coordinates(r2,c);
+    				Coordinates third = new Coordinates(r3,c);
+    				Coordinates fourth = new Coordinates(r4,c);
+    				
     				Piece color = this.pieces[r1][c];
+    				
+    				winningSequence.setFirst(first);
+    				winningSequence.setSecond(second);
+    				winningSequence.setThird(third);
+    				winningSequence.setFourth(fourth);
+    				winningSequence.setPiece(color);
+    				
     				return color;   				
     			}
     		}
@@ -194,7 +220,7 @@ public class Board {
 	 * Check the diagonal "\" pieces.
 	 * @return color if there is four diagonal pieces of the same color, null otherwise.
 	 */
-    private Piece checkDiagonal() {
+    private Piece checkDiagonal(WinningSequence winningSequence) {
     	for(int i1 = 0; i1 < 3 ; i1++) {
     		int i2 = i1+1;
     		int i3 = i1+2;
@@ -210,7 +236,19 @@ public class Board {
 					this.pieces[i4][j4]
 					
 				)) {
+					Coordinates first = new Coordinates(i1,j1);
+    				Coordinates second = new Coordinates(i2,j2);
+    				Coordinates third = new Coordinates(i3,j3);
+    				Coordinates fourth = new Coordinates(i4,j4);
+    				
     				Piece color = this.pieces[i1][j1];
+    				
+    				winningSequence.setFirst(first);
+    				winningSequence.setSecond(second);
+    				winningSequence.setThird(third);
+    				winningSequence.setFourth(fourth);
+    				winningSequence.setPiece(color);
+    				
     				return color;   				
     			}
     		}
@@ -222,7 +260,7 @@ public class Board {
 	 * Check the anti-diagonal "/" pieces.
 	 * @return color if there is four anti-diagonal pieces of the same color, null otherwise.
 	 */
-    private Piece checkAntiDiagonal() {
+    private Piece checkAntiDiagonal(WinningSequence winningSequence) {
     	for(int i1 = 0; i1 < 3; i1++) {
     		int i2 = i1+1;
     		int i3 = i1+2;
@@ -238,7 +276,19 @@ public class Board {
 					this.pieces[i4][j4]
 					
 				)) {
+					Coordinates first = new Coordinates(i1,j1);
+    				Coordinates second = new Coordinates(i2,j2);
+    				Coordinates third = new Coordinates(i3,j3);
+    				Coordinates fourth = new Coordinates(i4,j4);
+    				
     				Piece color = this.pieces[i1][j1];
+    				
+    				winningSequence.setFirst(first);
+    				winningSequence.setSecond(second);
+    				winningSequence.setThird(third);
+    				winningSequence.setFourth(fourth);
+    				winningSequence.setPiece(color);
+    				
     				return color;   				
     			}
     		}
@@ -286,7 +336,7 @@ public class Board {
     public String toString() {
         StringBuilder outputString = new StringBuilder();
         for(int y=0; y<HEIGHT; y++){
-        	outputString.append("║ ");
+        	outputString.append(y+1+" -> "+" ║ ");
             for(int x=0; x<WIDTH; x++) {
                 outputString.append(this.pieces[y][x]);
                 outputString.append(" ║ ");
@@ -294,9 +344,9 @@ public class Board {
             outputString.append("\n");
         }
         outputString.append(
-        	  "╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n"
-    		+ "║ 1 ║ 2 ║ 3 ║ 4 ║ 5 ║ 6 ║ 7 ║\n"
-    		+ "╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
+        	  "      ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n"
+    		+ "      ║ 1 ║ 2 ║ 3 ║ 4 ║ 5 ║ 6 ║ 7 ║\n"
+    		+ "      ╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
 		);
         return outputString.toString();
     }

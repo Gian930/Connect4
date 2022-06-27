@@ -16,5 +16,53 @@ public class WinningSequence {
 		this.fourth=fourth;
 	}
 	
+	
+	public WinningSequence() {}
+	
+	public Piece getPiece() {
+		return piece;
+	}
+
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+	}
+
+	public Coordinates getFirst() {
+		return first;
+	}
+
+	public void setFirst(Coordinates first) {
+		this.first = first;
+	}
+
+	public Coordinates getSecond() {
+		return second;
+	}
+
+	public void setSecond(Coordinates second) {
+		this.second = second;
+	}
+
+	public Coordinates getThird() {
+		return third;
+	}
+
+	public void setThird(Coordinates third) {
+		this.third = third;
+	}
+
+	public Coordinates getFourth() {
+		return fourth;
+	}
+
+	public void setFourth(Coordinates fourth) {
+		this.fourth = fourth;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "{"+this.piece+"; "+this.first+", "+this.second+", "+this.third+", "+this.fourth+"}";
+	}
 
 }

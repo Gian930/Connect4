@@ -59,6 +59,7 @@ public final class Game {
     	boolean isRedTurn = this.chooseFirstPlayer();
     	//Initialize turn: an instance of type Piece.
     	Piece turn;
+    	WinningSequence winningSequence = new WinningSequence();
     	//If the board is filled the game is finished and there isn't a winner, so it's a draw.
     	while(winner == null && !this.board.isFilled()) {
     		Game.clearScreen();
@@ -74,16 +75,22 @@ public final class Game {
     		}
     		int playerInput = this.chooseMove();
     		this.board.makeMove(playerInput, turn);
-    		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer);
+    		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer, winningSequence);
     		isRedTurn = !isRedTurn;
     	}
-    	//Showing the final board.
-    	Game.clearScreen();
-    	System.out.println(this.board);
+    	this.winningAnimation(winningSequence);
     	
         return winner;
     }
     
+    private void winningAnimation(WinningSequence winningSequence) {
+    	//Showing the final board.
+    	Game.clearScreen();
+    	System.out.println(this.board);
+    	System.out.println(winningSequence);
+    	
+    	
+    }
     /**
      * Choose the first player.
      * @return true (so it's the first player) or false (it's not).

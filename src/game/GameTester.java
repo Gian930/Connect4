@@ -6,14 +6,14 @@ import java.util.List;
 
 public class GameTester {
 	
-	private static boolean valid;
+	private static boolean isValid;
 
 	/**
 	 * The main test.
 	 */
 	public static void test() {
 		
-		System.out.println("Running all game tests: ");
+		System.out.println("\nRunning all game possible wrong input tests: \n");
 		GameTester.testWrongInput();
 	}
 	
@@ -28,19 +28,19 @@ public class GameTester {
     	try {
     		//Trying to parse playerInput in integer.
     		Integer input = Integer.parseInt(playerInput);
-    		//If it's a valid number, the boolean valid is true and false otherwise. 
+    		//If it's a valid number, the boolean isValid is true and false otherwise. 
     		if(game.isValidInput(input)) {
-    			valid = true;
+    			isValid = true;
     		} else {
-    			valid = false;
+    			isValid = false;
     		} 
-    		//If the input it's not a number, valid is false.
+    		//If the input it's not a number, isValid is false.
     	} catch (NumberFormatException ex) {
-    		valid = false;
+    		isValid = false;
     	}
     	
-    	//If valid is false we passed the tests.
-    	System.out.println(valid == false ? "PASSED" : "FAILED");
+    	//If isValid is false we passed the tests.
+    	System.out.println(isValid == false ? "PASSED" : "FAILED");
     }
     
 	/**
@@ -62,12 +62,12 @@ public class GameTester {
 		Board board = new Board(new ArrayList<String>(lines));
 		
 		if(board.isColumnFull(playerInput)) {
-			valid = true;
+			isValid = true;
 		} else {
-			valid = false;
+			isValid = false;
 		}
 		
-		System.out.println(valid ? "PASSED" : "FAILED");
+		System.out.println(isValid ? "PASSED" : "FAILED");
 		
 	}
 	
@@ -75,14 +75,22 @@ public class GameTester {
      * Simulate possible wrong input from the player.
      */
 	private static void testWrongInput() {
-		
+
+		System.out.print("Number greater than 7: ");
 		GameTester.isPassed("10");
+		System.out.print("Number smaller than 1: ");
 		GameTester.isPassed("-3");
+		System.out.print("Lowercase letter: ");
 		GameTester.isPassed("a");
+		System.out.print("Capital letter: ");
 		GameTester.isPassed("C");
+		System.out.print("Space: ");
 		GameTester.isPassed(" ");
+		System.out.print("An empty string: ");
 		GameTester.isPassed("");
+		System.out.print("A symbol: ");
 		GameTester.isPassed("%");
+		System.out.print("Full column input case: ");
 		GameTester.testFullColumnInput(1);
 
 	}
