@@ -159,10 +159,10 @@ public class Board {
 					this.pieces[r][c4]
 					
 				)) {
-    				Coordinates first = new Coordinates(c1,r);
-    				Coordinates second = new Coordinates(c2,r);
-    				Coordinates third = new Coordinates(c3,r);
-    				Coordinates fourth = new Coordinates(c4,r);
+    				Coordinates first = new Coordinates(r,c1);
+    				Coordinates second = new Coordinates(r,c2);
+    				Coordinates third = new Coordinates(r,c3);
+    				Coordinates fourth = new Coordinates(r,c4);
     				
     				Piece color = this.pieces[r][c1];
     				

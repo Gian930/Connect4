@@ -40,6 +40,7 @@ public enum Piece {
 		}
 	}
 	
+	
 	/**
 	 * Override the toString method of the Object superclass.
 	 * @return "X", "O" or " " depending in what case we are.

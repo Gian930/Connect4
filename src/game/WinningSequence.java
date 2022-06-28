@@ -59,6 +59,30 @@ public class WinningSequence {
 		this.fourth = fourth;
 	}
 	
+	/**
+	 * Override equals method in Object for WinningSequenceTester.
+	 * @param object the reference object with which to compare.
+	 * @return true if this object is the same as the object argument; false otherwise.
+	 */
+	@Override
+	public boolean equals(Object object) {
+		
+		//return true if the object is compare to itself.
+		if(this==object) {
+			return true;
+		}
+		
+		if(!(object instanceof WinningSequence)) {
+			return false;
+		}
+		
+		WinningSequence winningSequence = (WinningSequence) object;
+		
+		return this.piece == winningSequence.piece && this.first.equals(winningSequence.first)  && 
+				this.second.equals(winningSequence.second) && 
+				this.third.equals(winningSequence.third) && this.fourth.equals(winningSequence.fourth);
+		
+	}
 
 	@Override
 	public String toString() {
