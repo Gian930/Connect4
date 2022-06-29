@@ -67,10 +67,10 @@ public class WinningSequenceTester {
 		};
 		
 		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(5,0);
-		Coordinates second = new Coordinates(5,1);
-		Coordinates third = new Coordinates(5,2);
-		Coordinates fourth = new Coordinates(5,3);
+		Coordinates first = new Coordinates(0,5);
+		Coordinates second = new Coordinates(1,5);
+		Coordinates third = new Coordinates(2,5);
+		Coordinates fourth = new Coordinates(3,5);
 		
 		//Expected winning sequence.
 		WinningSequence winningSequenceHorizontal = new WinningSequence(piece, first, second, third, fourth);
@@ -96,10 +96,10 @@ public class WinningSequenceTester {
 		};
 		
 		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(2,0);
-		Coordinates second = new Coordinates(3,0);
-		Coordinates third = new Coordinates(4,0);
-		Coordinates fourth = new Coordinates(5,0);
+		Coordinates first = new Coordinates(0,2);
+		Coordinates second = new Coordinates(0,3);
+		Coordinates third = new Coordinates(0,4);
+		Coordinates fourth = new Coordinates(0,5);
 		
 		WinningSequence winningSequenceVertical = new WinningSequence(piece, first, second, third, fourth);
 		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
@@ -122,10 +122,10 @@ public class WinningSequenceTester {
 		};
 		
 		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(2,0);
-		Coordinates second = new Coordinates(3,1);
-		Coordinates third = new Coordinates(4,2);
-		Coordinates fourth = new Coordinates(5,3);
+		Coordinates first = new Coordinates(0,2);
+		Coordinates second = new Coordinates(1,3);
+		Coordinates third = new Coordinates(2,4);
+		Coordinates fourth = new Coordinates(3,5);
 		
 		WinningSequence winningSequenceDiagonal = new WinningSequence(piece, first, second, third, fourth);
 		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
@@ -148,10 +148,10 @@ public class WinningSequenceTester {
 		};
 		
 		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(2,3);
-		Coordinates second = new Coordinates(3,2);
-		Coordinates third = new Coordinates(4,1);
-		Coordinates fourth = new Coordinates(5,0);
+		Coordinates first = new Coordinates(3,2);
+		Coordinates second = new Coordinates(2,3);
+		Coordinates third = new Coordinates(1,4);
+		Coordinates fourth = new Coordinates(0,5);
 		
 		WinningSequence winningSequenceAntiDiagonal = new WinningSequence(piece, first, second, third, fourth);
 		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);

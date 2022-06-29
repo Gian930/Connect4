@@ -83,10 +83,14 @@ public final class Game {
         return winner;
     }
     
-    private void winningAnimation(WinningSequence winningSequence) {
-    	//Showing the final board.   	
+    /**
+     * Winning sequence animation.
+     * @param winningSequence
+     */
+    private void winningAnimation(WinningSequence winningSequence) {   	
     	try {
     		for(int i = 0; i < 6; i++) {
+    			//Showing the final board with the animation using Thread.sleep().
         		Thread.sleep(500);
         		Game.clearScreen();
         		this.board.blink(winningSequence);
@@ -168,13 +172,12 @@ public final class Game {
     	
     }
     
-    
     /**
      * Check if playerInput is a valid number.
      * @param playerInput a number taken from input.
      * @return true if playerInput is valid and false otherwise.
      */
-    public boolean isValidInput(Integer playerInput) {
+    private boolean isValidInput(Integer playerInput) {
     	return playerInput >= 1 && playerInput <= Board.getWidth() && !this.board.isColumnFull(playerInput);
     }
       

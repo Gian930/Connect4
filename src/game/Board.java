@@ -159,10 +159,10 @@ public class Board {
 					this.pieces[r][c4]
 					
 				)) {
-    				Coordinates first = new Coordinates(r,c1);
-    				Coordinates second = new Coordinates(r,c2);
-    				Coordinates third = new Coordinates(r,c3);
-    				Coordinates fourth = new Coordinates(r,c4);
+    				Coordinates first = new Coordinates(c1,r);
+    				Coordinates second = new Coordinates(c2,r);
+    				Coordinates third = new Coordinates(c3,r);
+    				Coordinates fourth = new Coordinates(c4,r);
     				
     				Piece color = this.pieces[r][c1];
     				
@@ -236,10 +236,10 @@ public class Board {
 					this.pieces[i4][j4]
 					
 				)) {
-					Coordinates first = new Coordinates(i1,j1);
-    				Coordinates second = new Coordinates(i2,j2);
-    				Coordinates third = new Coordinates(i3,j3);
-    				Coordinates fourth = new Coordinates(i4,j4);
+					Coordinates first = new Coordinates(j1,i1);
+    				Coordinates second = new Coordinates(j2,i2);
+    				Coordinates third = new Coordinates(j3,i3);
+    				Coordinates fourth = new Coordinates(j4,i4);
     				
     				Piece color = this.pieces[i1][j1];
     				
@@ -276,10 +276,10 @@ public class Board {
 					this.pieces[i4][j4]
 					
 				)) {
-					Coordinates first = new Coordinates(i1,j1);
-    				Coordinates second = new Coordinates(i2,j2);
-    				Coordinates third = new Coordinates(i3,j3);
-    				Coordinates fourth = new Coordinates(i4,j4);
+					Coordinates first = new Coordinates(j1,i1);
+    				Coordinates second = new Coordinates(j2,i2);
+    				Coordinates third = new Coordinates(j3,i3);
+    				Coordinates fourth = new Coordinates(j4,i4);
     				
     				Piece color = this.pieces[i1][j1];
     				
@@ -328,6 +328,10 @@ public class Board {
     	}
     }
     
+    /**
+     * Blink the winning sequence for the animation.
+     * @param winningSequence
+     */
     public void blink(WinningSequence winningSequence) {
     	
     	Coordinates first = winningSequence.getFirst();
@@ -335,6 +339,7 @@ public class Board {
     	Coordinates third = winningSequence.getThird();
     	Coordinates fourth = winningSequence.getFourth();
     	
+    	//Create an ArrayList of coordinates of the winning sequence.
     	ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
     	coordinates.add(first);
     	coordinates.add(second);
@@ -345,12 +350,14 @@ public class Board {
     		int x = coordinate.getX();
     		int y = coordinate.getY();
     		Piece piece = this.pieces[y][x];
+    		
     		if(piece == Piece.EMPTY) {
     			this.pieces[y][x] = winningSequence.getPiece();
     		} else {
     			this.pieces[y][x] = Piece.EMPTY;
     		}
     	}
+    	
     }
     
     /**

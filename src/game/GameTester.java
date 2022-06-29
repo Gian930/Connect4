@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GameTester {
 	
-	private static boolean isValid;
+	private static boolean isNotValid;
 
 	/**
 	 * The main test.
@@ -14,33 +14,31 @@ public class GameTester {
 	public static void test() {
 		
 		System.out.println("\nRunning all game possible wrong input tests: \n");
-		GameTester.testWrongInput();
+		GameTester.testInput();
 	}
 	
 	/**
 	 * Check if the input is valid.
 	 * @param playerInput input from the player.
 	 */
-    private static void isPassed(String playerInput) {
-    	
-    	Game game = new Game();
-    	
+    private static void isPassed(String rawInput) {
+
     	try {
     		//Trying to parse playerInput in integer.
-    		Integer input = Integer.parseInt(playerInput);
+    		Integer playerInput = Integer.parseInt(rawInput);
     		//If it's a valid number, the boolean isValid is true and false otherwise. 
-    		if(game.isValidInput(input)) {
-    			isValid = true;
+    		if(playerInput >= 1 && playerInput <= Board.getWidth()) {
+    			isNotValid = false;
     		} else {
-    			isValid = false;
+    			isNotValid = true;
     		} 
     		//If the input it's not a number, isValid is false.
     	} catch (NumberFormatException ex) {
-    		isValid = false;
+    		isNotValid = true;	
     	}
     	
     	//If isValid is false we passed the tests.
-    	System.out.println(isValid == false ? "PASSED" : "FAILED");
+    	System.out.println(isNotValid ? "PASSED" : "FAILED");
     }
     
 	/**
@@ -62,19 +60,44 @@ public class GameTester {
 		Board board = new Board(new ArrayList<String>(lines));
 		
 		if(board.isColumnFull(playerInput)) {
-			isValid = true;
+			isNotValid = true;
 		} else {
-			isValid = false;
+			isNotValid = false;
 		}
 		
-		System.out.println(isValid ? "PASSED" : "FAILED");
+		System.out.println(isNotValid ? "PASSED" : "FAILED");
 		
 	}
 	
+	/**
+	 * Test "save filename" input
+	 * @param rawInput the string to check.
+	 */
+	private static void isSaveInput(String rawInput) {
+		
+		if(rawInput.startsWith("save")) {
+			String[] args = rawInput.split(" ");
+			
+			/**
+			 * The input could be like:
+			 * - "save": this is incorrect because is missing file's name.
+			 * - "save filename other": this is incorrect because there are too many arguments. 
+			 */
+			if(args.length < 2 || args.length > 2) {
+				isNotValid = true;
+			} else {
+				//In this case the input is valid because is like : "save filename".
+				isNotValid = false;
+			}
+		}
+		
+		System.out.println(isNotValid == false ? "PASSED" : "FAILED");
+	}
+	
     /**
-     * Simulate possible wrong input from the player.
+     * Simulate possible input from the player.
      */
-	private static void testWrongInput() {
+	private static void testInput() {
 
 		System.out.print("Number greater than 7: ");
 		GameTester.isPassed("10");
@@ -92,9 +115,9 @@ public class GameTester {
 		GameTester.isPassed("%");
 		System.out.print("Full column input case: ");
 		GameTester.testFullColumnInput(1);
+		System.out.print("Save input case: ");
+		GameTester.isSaveInput("save filename");
 
 	}
-	
-
 	
 }
