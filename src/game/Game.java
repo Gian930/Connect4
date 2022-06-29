@@ -84,10 +84,18 @@ public final class Game {
     }
     
     private void winningAnimation(WinningSequence winningSequence) {
-    	//Showing the final board.
-    	Game.clearScreen();
-    	System.out.println(this.board);
-    	System.out.println(winningSequence);
+    	//Showing the final board.   	
+    	try {
+    		for(int i = 0; i < 6; i++) {
+        		Thread.sleep(500);
+        		Game.clearScreen();
+        		this.board.blink(winningSequence);
+        		System.out.println(this.board);
+    		}
+			
+		} catch (InterruptedException e) {
+			System.out.println("Something went wrong while displaying the winning animation.");
+		}
     	
     	
     }
@@ -115,24 +123,50 @@ public final class Game {
     private int chooseMove() {
     	//Integer because we can convert playerInput from null to integer.
     	Integer playerInput=null;
+    	String rawInput = "";
     	while(playerInput == null) {
     		try{
     			System.out.print("Choose a number between 1 and 7: ");
-		    	String number = Game.scanner.nextLine();
+		    	rawInput = Game.scanner.nextLine();
 		    	//Parses the string argument as an integer.
-		    	playerInput = Integer.parseInt(number);
+		    	playerInput = Integer.parseInt(rawInput);
 		    	if (!this.isValidInput(playerInput)) {
-		    		System.out.print("Invalid number. ");
+		    		System.out.print("Invalid number.");
 		    		playerInput = null;
 		    	}
 	        }
 	        catch (NumberFormatException ex){
-	        	System.out.println("Invalid input. Please choose another number.");
+	        	if(!this.parseCommand(rawInput))
+        			System.out.println("Invalid input. Please choose another number.");
 	        }
     	}
     	return playerInput;	
     }
     
+    private boolean parseCommand(String rawInput) {
+    	if(rawInput.startsWith("save")) {
+    		String[] args = rawInput.split(" ");
+    		if(args.length < 2) {
+    			System.out.println("Missing file name.");
+    		} else if (args.length > 2) {
+    			System.out.println("Too many arguments.");
+    		} else {
+    			if(args[1].equals("-h") || args[1].equals("--help")) {
+    				System.out.println("Save command usage: \n      save [filename] | [-h | --help]");
+    			} else {
+    				// controllare caratteri particolari del nome del file.
+    				this.saveSession(args[1]);
+    				System.out.println("File saved successfully in '"+args[1]+"'.");
+    			}
+    		}
+    		return true;
+    	}
+    	return false;
+    }
+    
+    private void saveSession(String name) {
+    	
+    }
     
     
     /**

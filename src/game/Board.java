@@ -196,10 +196,10 @@ public class Board {
 					this.pieces[r4][c]
 					
 				)) {
-    				Coordinates first = new Coordinates(r1,c);
-    				Coordinates second = new Coordinates(r2,c);
-    				Coordinates third = new Coordinates(r3,c);
-    				Coordinates fourth = new Coordinates(r4,c);
+    				Coordinates first = new Coordinates(c,r1);
+    				Coordinates second = new Coordinates(c,r2);
+    				Coordinates third = new Coordinates(c,r3);
+    				Coordinates fourth = new Coordinates(c,r4);
     				
     				Piece color = this.pieces[r1][c];
     				
@@ -325,6 +325,31 @@ public class Board {
     		}
     	} else {
     		return null;
+    	}
+    }
+    
+    public void blink(WinningSequence winningSequence) {
+    	
+    	Coordinates first = winningSequence.getFirst();
+    	Coordinates second = winningSequence.getSecond();
+    	Coordinates third = winningSequence.getThird();
+    	Coordinates fourth = winningSequence.getFourth();
+    	
+    	ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
+    	coordinates.add(first);
+    	coordinates.add(second);
+    	coordinates.add(third);
+    	coordinates.add(fourth);
+    	
+    	for(Coordinates coordinate : coordinates) {
+    		int x = coordinate.getX();
+    		int y = coordinate.getY();
+    		Piece piece = this.pieces[y][x];
+    		if(piece == Piece.EMPTY) {
+    			this.pieces[y][x] = winningSequence.getPiece();
+    		} else {
+    			this.pieces[y][x] = Piece.EMPTY;
+    		}
     	}
     }
     
