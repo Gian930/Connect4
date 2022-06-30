@@ -81,7 +81,7 @@ public class GameTester {
 			/**
 			 * The input could be like:
 			 * - "save": this is incorrect because is missing file's name.
-			 * - "save filename other": this is incorrect because there are too many arguments. 
+			 * - "save filename other...": this is incorrect because there are too many arguments. 
 			 */
 			if(args.length < 2 || args.length > 2) {
 				isNotValid = true;

@@ -159,6 +159,7 @@ public class Board {
 					this.pieces[r][c4]
 					
 				)) {
+    				//Take coordinates for winning sequence.
     				Coordinates first = new Coordinates(c1,r);
     				Coordinates second = new Coordinates(c2,r);
     				Coordinates third = new Coordinates(c3,r);
@@ -166,6 +167,7 @@ public class Board {
     				
     				Piece color = this.pieces[r][c1];
     				
+    				//Set the winning sequence.
     				winningSequence.setFirst(first);
     				winningSequence.setSecond(second);
     				winningSequence.setThird(third);
