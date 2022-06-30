@@ -99,10 +99,9 @@ public final class Game {
 			
 		} catch (InterruptedException e) {
 			System.out.println("Something went wrong while displaying the winning animation.");
-		}
-    	
-    	
+		}	
     }
+    
     /**
      * Choose the first player.
      * @return true (so it's the first player) or false (it's not).

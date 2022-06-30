@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Tester for player's input.
+ * @author Gianmarco Caldaroni.
+ *
+ */
 public class GameTester {
 	
+	/**
+	 * Boolean used in all method to decide if the input is valid or not.
+	 */
 	private static boolean isNotValid;
 
 	/**
@@ -22,7 +30,6 @@ public class GameTester {
 	 * @param playerInput input from the player.
 	 */
     private static void isPassed(String rawInput) {
-
     	try {
     		//Trying to parse playerInput in integer.
     		Integer playerInput = Integer.parseInt(rawInput);

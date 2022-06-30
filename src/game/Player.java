@@ -48,7 +48,6 @@ public class Player {
         this.setName(name);
     }
     
-    
     /**
      * Override the toString method of the Object superclass.
      * @return a string representation of the object.

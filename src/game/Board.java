@@ -370,7 +370,7 @@ public class Board {
     public String toString() {
         StringBuilder outputString = new StringBuilder();
         for(int y=0; y<HEIGHT; y++){
-        	outputString.append(y+1+" -> "+" ║ ");
+        	outputString.append("║ ");
             for(int x=0; x<WIDTH; x++) {
                 outputString.append(this.pieces[y][x]);
                 outputString.append(" ║ ");
@@ -378,9 +378,9 @@ public class Board {
             outputString.append("\n");
         }
         outputString.append(
-        	  "      ╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n"
-    		+ "      ║ 1 ║ 2 ║ 3 ║ 4 ║ 5 ║ 6 ║ 7 ║\n"
-    		+ "      ╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
+        	  "╠═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n"
+    		+ "║ 1 ║ 2 ║ 3 ║ 4 ║ 5 ║ 6 ║ 7 ║\n"
+    		+ "╚═══╩═══╩═══╩═══╩═══╩═══╩═══╝"
 		);
         return outputString.toString();
     }

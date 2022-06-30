@@ -153,9 +153,11 @@ public class WinningSequence {
 		WinningSequence winningSequence = (WinningSequence) object;
 		
 		//Using equals method from Coordinates class.
-		return this.piece == winningSequence.piece && this.first.equals(winningSequence.first)  && 
+		return this.piece == winningSequence.piece && 
+				this.first.equals(winningSequence.first) && 
 				this.second.equals(winningSequence.second) && 
-				this.third.equals(winningSequence.third) && this.fourth.equals(winningSequence.fourth);
+				this.third.equals(winningSequence.third) && 
+				this.fourth.equals(winningSequence.fourth);
 		
 	}
 	

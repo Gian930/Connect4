@@ -53,7 +53,6 @@ public class BoardTester {
 				board.checkWinner(player1, player2,winningSequence) ==  null ? "PASSED" : "FAILED");
 	}
 	
-	
 	/**
 	 * Horizontal test cases.
 	 */
@@ -280,5 +279,4 @@ public class BoardTester {
 		
 	}
 		
-	
 }
