@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Gianmarco Caldaroni.
  *
  */
-public class Board {
+public class Board implements Saveable {
 	
 	/**
 	 * The number of columns.
@@ -361,6 +361,22 @@ public class Board {
     	}
     	
     }
+    
+    @Override
+    public String toSaveState() {
+    	 StringBuilder outputString = new StringBuilder();
+         for(int y=0; y<HEIGHT; y++){
+             for(int x=0; x<WIDTH; x++) {
+                 outputString.append(this.pieces[y][x]);
+             }
+             if(y != HEIGHT-1) {
+            	 outputString.append("\n");	 
+             }
+             
+         }
+         return outputString.toString();
+    }
+  
     
     /**
      * Override the toString method of the Object superclass.

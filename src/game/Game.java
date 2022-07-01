@@ -1,5 +1,10 @@
 package game;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,6 +14,9 @@ import java.util.Scanner;
  *
  */
 public final class Game {
+	
+	private boolean isRedTurn;
+	private boolean firstTurn;
 	
 	/**
 	 * Create a Scanner object.
@@ -37,9 +45,18 @@ public final class Game {
     	this.redPlayer = new Player();
     	this.yellowPlayer = new Player();
         this.board= new Board();
+        this.isRedTurn = this.chooseFirstPlayer();
     }
     
-    /**
+    public Game(boolean isRedTurn, boolean firstTurn, Player redPlayer, Player yellowPlayer, Board board) {
+		this.isRedTurn = isRedTurn;
+		this.firstTurn = firstTurn;
+		this.redPlayer = redPlayer;
+		this.yellowPlayer = yellowPlayer;
+		this.board = board;
+	}
+
+	/**
      * Set names of both players.
      */
     public void setUp() {
@@ -49,34 +66,38 @@ public final class Game {
     	this.yellowPlayer.setNameFromInput();
     }
     
+    private Piece updateTurn() {
+    	Piece turn;
+    	if(this.isRedTurn) {
+			System.out.print(this.redPlayer.getName()+"'s turn. ");
+			//turn becomes a red piece.
+			turn = Piece.RED;
+		} else {
+			System.out.print(this.yellowPlayer.getName()+"'s turn. ");
+			//else turn becomes a yellow piece.
+			turn = Piece.YELLOW;
+		}
+    	return turn;
+    }
+    
     /**
      * Run a new game.
      * @return winner of the game or, if it's a draw, null.
      * 
      */
     public Player run() {
-    	Player winner = null;
-    	boolean isRedTurn = this.chooseFirstPlayer();
-    	//Initialize turn: an instance of type Piece.
-    	Piece turn;
+    	Player winner = null;    	
+    	//Initialize turn: an instance of type Piece.    	
     	WinningSequence winningSequence = new WinningSequence();
     	//If the board is filled the game is finished and there isn't a winner, so it's a draw.
     	while(winner == null && !this.board.isFilled()) {
     		Game.clearScreen();
-    		System.out.println(this.board);
-    		if(isRedTurn) {
-    			System.out.print(this.redPlayer.getName()+"'s turn. ");
-    			//turn becomes a red piece.
-    			turn = Piece.RED;
-    		} else {
-    			System.out.print(this.yellowPlayer.getName()+"'s turn. ");
-    			//else turn becomes a yellow piece.
-    			turn = Piece.YELLOW;
-    		}
+    		System.out.println(this.board);    		
     		int playerInput = this.chooseMove();
+    		Piece turn = this.updateTurn();
     		this.board.makeMove(playerInput, turn);
     		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer, winningSequence);
-    		isRedTurn = !isRedTurn;
+    		this.isRedTurn = !this.isRedTurn;
     	}
     	this.winningAnimation(winningSequence);
     	
@@ -134,7 +155,7 @@ public final class Game {
 		    	//Parses the string argument as an integer.
 		    	playerInput = Integer.parseInt(rawInput);
 		    	if (!this.isValidInput(playerInput)) {
-		    		System.out.print("Invalid number.");
+		    		System.out.print("Invalid number. ");
 		    		playerInput = null;
 		    	}
 	        }
@@ -158,7 +179,11 @@ public final class Game {
     				System.out.println("Save command usage: \n      save [filename] | [-h | --help]");
     			} else {
     				// controllare caratteri particolari del nome del file.
-    				this.saveSession(args[1]);
+    				try {
+						this.saveSession(args[1]);
+					} catch (FileNotFoundException e) {
+						System.out.println("Something went wrong while saving the file.");
+					}
     				System.out.println("File saved successfully in '"+args[1]+"'.");
     			}
     		}
@@ -167,7 +192,15 @@ public final class Game {
     	return false;
     }
     
-    private void saveSession(String name) {
+    private void saveSession(String fileName) throws FileNotFoundException {
+    	StringBuilder saveStateText = new StringBuilder();
+    	saveStateText.append(this.redPlayer.toSaveState()+"\n");
+    	saveStateText.append(this.yellowPlayer.toSaveState()+"\n");
+    	saveStateText.append(this.firstTurn+"\n");
+    	saveStateText.append(this.board.toSaveState());
+    	PrintWriter writer = new PrintWriter(new File(fileName));
+    	writer.write(saveStateText.toString());
+    	writer.close();
     	
     }
     
@@ -178,6 +211,31 @@ public final class Game {
      */
     private boolean isValidInput(Integer playerInput) {
     	return playerInput >= 1 && playerInput <= Board.getWidth() && !this.board.isColumnFull(playerInput);
+    }
+    
+    private static ArrayList<String> readLines(String fileName) throws FileNotFoundException {
+    	ArrayList<String> lines = new ArrayList<String>();
+    	Scanner scanner;
+    	String line;
+    	scanner = new Scanner(new File(fileName));
+    	while(scanner.hasNextLine()) {
+	    	line = scanner.nextLine();
+	    	lines.add(line);
+    	}
+    	scanner.close();
+    	return lines;
+    }
+    
+    public static Game fromSaveState(String fileName) throws FileNotFoundException {
+    	
+    	ArrayList<String> lines = readLines(fileName);
+    	Player redPlayer = Player.fromSaveState(lines.get(0));
+    	Player yellowPlayer = Player.fromSaveState(lines.get(1));
+    	boolean firstTurn = Boolean.parseBoolean(lines.get(2));
+    	lines.remove(0);
+    	lines.remove(0);
+    	
+    	
     }
       
 }

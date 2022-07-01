@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Gianmarco Caldaroni.
  *
  */
-public class Player {
+public class Player implements Saveable {
 	
 	/**
 	 * Create a Scanner object.
@@ -48,6 +48,10 @@ public class Player {
         this.setName(name);
     }
     
+    @Override
+    public String toSaveState() {
+    	return this.toString();
+    }
     /**
      * Override the toString method of the Object superclass.
      * @return a string representation of the object.

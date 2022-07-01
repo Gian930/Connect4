@@ -6,7 +6,7 @@ package game;
  * @author Gianmarco Caldaroni.
  *
  */
-public enum Piece {
+public enum Piece implements Saveable {
 	
 	/**
 	 * The yellow piece.
@@ -38,6 +38,11 @@ public enum Piece {
 			default:
 				return null;
 		}
+	}
+	
+	@Override
+	public String toSaveState() {
+		return this.toString();
 	}
 	
 	/**
