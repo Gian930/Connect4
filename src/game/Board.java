@@ -51,6 +51,8 @@ public class Board implements Saveable {
         }
     }
 	
+	
+	
 	/**
 	 * Overload the constructor for BoardTester.
 	 * @param lines represents a particular status of the board.
@@ -362,7 +364,54 @@ public class Board implements Saveable {
     	
     }
     
-    @Override
+    public static Board fromSaveState(ArrayList<String> lines) {
+    	Piece[][] pieces = new Piece[HEIGHT][WIDTH]; 
+    	for(int y=0; y<HEIGHT; y++){
+            for(int x=0; x<WIDTH; x++) {
+            	pieces[y][x] = Piece.fromCharacter(lines.get(y).charAt(x));
+            }
+    	}
+    	Board board = new Board();
+    	board.setPieces(pieces);
+    	return board;
+    }
+
+	public void setPieces(Piece[][] pieces) {
+		this.pieces = pieces;
+	}
+	
+	public Boolean evaluateTurn(boolean firstTurn) {
+		int yellowCounter = 0;
+		int redCounter = 0;
+		for(int y=0; y<HEIGHT; y++){
+            for(int x=0; x<WIDTH; x++) {
+            	switch(this.pieces[y][x]) {
+            	case YELLOW:
+            		++yellowCounter;
+            		break;
+            	case RED:
+            		++redCounter;
+            		break;
+            	default:
+            		break;
+            	}
+            	
+            }
+		}
+		if(yellowCounter == redCounter) {
+			return firstTurn;
+		} else if (redCounter-yellowCounter == 1) {
+			return false;
+		} else if (yellowCounter-redCounter == 1) {
+			return true;
+		} else {
+			// TODO creare eccezione
+			return null;
+		}
+		
+	}
+
+	@Override
     public String toSaveState() {
     	 StringBuilder outputString = new StringBuilder();
          for(int y=0; y<HEIGHT; y++){

@@ -19,7 +19,11 @@ public class Player implements Saveable {
 	 */
     private String name;
     
-    /**
+    public Player(String name) {
+		this.name = name;
+	}
+
+	/**
      * The constructor.
      */
     public Player() { }
@@ -46,6 +50,10 @@ public class Player implements Saveable {
     public void setNameFromInput() {       
         String name = scanner.nextLine();
         this.setName(name);
+    }
+    
+    public static Player fromSaveState(String input) {
+    	return new Player(input);
     }
     
     @Override

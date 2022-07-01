@@ -2,7 +2,6 @@ package game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
@@ -69,11 +68,11 @@ public final class Game {
     private Piece updateTurn() {
     	Piece turn;
     	if(this.isRedTurn) {
-			System.out.print(this.redPlayer.getName()+"'s turn. ");
+			System.out.println(this.redPlayer.getName()+"'s turn. ");
 			//turn becomes a red piece.
 			turn = Piece.RED;
 		} else {
-			System.out.print(this.yellowPlayer.getName()+"'s turn. ");
+			System.out.println(this.yellowPlayer.getName()+"'s turn. ");
 			//else turn becomes a yellow piece.
 			turn = Piece.YELLOW;
 		}
@@ -92,9 +91,10 @@ public final class Game {
     	//If the board is filled the game is finished and there isn't a winner, so it's a draw.
     	while(winner == null && !this.board.isFilled()) {
     		Game.clearScreen();
+    		Piece turn = this.updateTurn();
     		System.out.println(this.board);    		
     		int playerInput = this.chooseMove();
-    		Piece turn = this.updateTurn();
+    		
     		this.board.makeMove(playerInput, turn);
     		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer, winningSequence);
     		this.isRedTurn = !this.isRedTurn;
@@ -234,6 +234,10 @@ public final class Game {
     	boolean firstTurn = Boolean.parseBoolean(lines.get(2));
     	lines.remove(0);
     	lines.remove(0);
+    	lines.remove(0);
+    	Board board = Board.fromSaveState(lines);
+    	boolean isRedTurn = board.evaluateTurn(firstTurn);
+    	return new Game(isRedTurn, firstTurn, redPlayer, yellowPlayer, board);
     	
     	
     }
