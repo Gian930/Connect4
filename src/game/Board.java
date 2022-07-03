@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Gianmarco Caldaroni.
  *
  */
-public class Board implements Saveable {
+public class Board implements Savable {
 	
 	/**
 	 * The number of columns.
@@ -50,8 +50,6 @@ public class Board implements Saveable {
             }
         }
     }
-	
-	
 	
 	/**
 	 * Overload the constructor for BoardTester.
@@ -364,23 +362,44 @@ public class Board implements Saveable {
     	
     }
     
+    /**
+     * Create a board reading information from ArrayList lines.
+     * @param lines
+     * @return board
+     */
     public static Board fromSaveState(ArrayList<String> lines) {
+    	
     	Piece[][] pieces = new Piece[HEIGHT][WIDTH]; 
     	for(int y=0; y<HEIGHT; y++){
             for(int x=0; x<WIDTH; x++) {
+            	//Putting in the board pieces taken from lines.
             	pieces[y][x] = Piece.fromCharacter(lines.get(y).charAt(x));
             }
     	}
+
     	Board board = new Board();
+    	//Set the pieces in the board.
     	board.setPieces(pieces);
+    	
     	return board;
     }
-
+    
+    /**
+     * Set the pieces.
+     * @param pieces
+     */
 	public void setPieces(Piece[][] pieces) {
 		this.pieces = pieces;
 	}
 	
+	/**
+	 * Evaluate what turn it is based on who started the game (firstTurn).
+	 * @param firstTurn true or false.
+	 * @return 
+	 */
 	public Boolean evaluateTurn(boolean firstTurn) {
+		
+		//Counting how many red and yellow pieces are in the board.
 		int yellowCounter = 0;
 		int redCounter = 0;
 		for(int y=0; y<HEIGHT; y++){
@@ -398,10 +417,14 @@ public class Board implements Saveable {
             	
             }
 		}
+		
+		//If they are equals it's the player who started the game.
 		if(yellowCounter == redCounter) {
 			return firstTurn;
+			//If redCounter-yellowCounter is 1, return false, so it's yellow player's turn.
 		} else if (redCounter-yellowCounter == 1) {
 			return false;
+			//If yellowCounter-redCounter is 1, return true, so it's red player's turn.
 		} else if (yellowCounter-redCounter == 1) {
 			return true;
 		} else {
@@ -410,19 +433,25 @@ public class Board implements Saveable {
 		}
 		
 	}
-
+	
+	/**
+	 * Implements toSaveState() from Interface Savable.
+	 * Create the board for save file.
+	 */
 	@Override
     public String toSaveState() {
+		
     	 StringBuilder outputString = new StringBuilder();
          for(int y=0; y<HEIGHT; y++){
              for(int x=0; x<WIDTH; x++) {
                  outputString.append(this.pieces[y][x]);
              }
+             //If it's the ultimate line we aren't appending "\n".
              if(y != HEIGHT-1) {
             	 outputString.append("\n");	 
              }
-             
          }
+         
          return outputString.toString();
     }
   

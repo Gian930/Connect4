@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Gianmarco Caldaroni.
  *
  */
-public class Player implements Saveable {
+public class Player implements Savable {
 	
 	/**
 	 * Create a Scanner object.
@@ -19,14 +19,19 @@ public class Player implements Saveable {
 	 */
     private String name;
     
+	/**
+     * The empty constructor.
+     */
+    public Player() { }
+    
+    /**
+     * Overload the empty constructor for fromSaveState().
+     * @param name
+     */
     public Player(String name) {
 		this.name = name;
 	}
 
-	/**
-     * The constructor.
-     */
-    public Player() { }
 
     /**
      * Get the name of the player.
@@ -52,14 +57,24 @@ public class Player implements Saveable {
         this.setName(name);
     }
     
+    /**
+     * This method it's used for getting redPlayer and yellowPlayer in Game.fromSaveState.  
+     * @param input
+     * @return new Player(input)
+     */
     public static Player fromSaveState(String input) {
     	return new Player(input);
     }
     
+    /**
+     * Implements toSaveState() from Interface Savable.
+     * @return this.toString()
+     */
     @Override
     public String toSaveState() {
     	return this.toString();
     }
+    
     /**
      * Override the toString method of the Object superclass.
      * @return a string representation of the object.

@@ -1,9 +1,9 @@
 T
 Y
 false
-       
-       
-       
    X   
-  OX   
+  XO   
+  XO   
+  XX   
+ OOX   
  OOX   

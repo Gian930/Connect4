@@ -14,7 +14,14 @@ import java.util.Scanner;
  */
 public final class Game {
 	
+	/**
+	 * A boolean used to determinate if it's red player's turn or not. 
+	 */
 	private boolean isRedTurn;
+	
+	/**
+	 * A boolean used to determinate if it's first player's turn or not.
+	 */
 	private boolean firstTurn;
 	
 	/**
@@ -47,6 +54,14 @@ public final class Game {
         this.isRedTurn = this.chooseFirstPlayer();
     }
     
+    /**
+     * Overload the constructor for fromSaveState method.
+     * @param isRedTurn
+     * @param firstTurn
+     * @param redPlayer
+     * @param yellowPlayer
+     * @param board
+     */
     public Game(boolean isRedTurn, boolean firstTurn, Player redPlayer, Player yellowPlayer, Board board) {
 		this.isRedTurn = isRedTurn;
 		this.firstTurn = firstTurn;
@@ -65,6 +80,10 @@ public final class Game {
     	this.yellowPlayer.setNameFromInput();
     }
     
+    /**
+     * Switching piece color every turn.
+     * @return turn piece red or yellow based on what color it was previously.
+     */
     private Piece updateTurn() {
     	Piece turn;
     	if(this.isRedTurn) {
@@ -93,8 +112,7 @@ public final class Game {
     		Game.clearScreen();
     		Piece turn = this.updateTurn();
     		System.out.println(this.board);    		
-    		int playerInput = this.chooseMove();
-    		
+    		int playerInput = this.chooseMove();   		
     		this.board.makeMove(playerInput, turn);
     		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer, winningSequence);
     		this.isRedTurn = !this.isRedTurn;
@@ -192,16 +210,25 @@ public final class Game {
     	return false;
     }
     
+    /**
+     * Save the current session:
+     * -The players.
+     * -The boolean firstTurn it's used to determinate if it's red or yellow player's turn:
+     * 	if it's true it's the turn that played first and false otherwise.
+     * @param fileName the name of the file: "fileName.txt"
+     * @throws FileNotFoundException if the file name doesnt's exist.
+     */
     private void saveSession(String fileName) throws FileNotFoundException {
     	StringBuilder saveStateText = new StringBuilder();
     	saveStateText.append(this.redPlayer.toSaveState()+"\n");
     	saveStateText.append(this.yellowPlayer.toSaveState()+"\n");
     	saveStateText.append(this.firstTurn+"\n");
     	saveStateText.append(this.board.toSaveState());
+    	//Using PrintWriter class to write in a file.
     	PrintWriter writer = new PrintWriter(new File(fileName));
     	writer.write(saveStateText.toString());
-    	writer.close();
-    	
+    	//Closes the stream.
+    	writer.close();   	
     }
     
     /**
@@ -213,33 +240,57 @@ public final class Game {
     	return playerInput >= 1 && playerInput <= Board.getWidth() && !this.board.isColumnFull(playerInput);
     }
     
+    /**
+     * This method it's used for reading all lines from a file.
+     * @param fileName the name of the file.
+     * @return lines an ArrayList of string  
+     * @throws FileNotFoundException if the file name doesnt's exist.
+     */
     private static ArrayList<String> readLines(String fileName) throws FileNotFoundException {
+    	
     	ArrayList<String> lines = new ArrayList<String>();
     	Scanner scanner;
     	String line;
+    	
+    	//Using scanner and creates a new File instance for reading a file.
     	scanner = new Scanner(new File(fileName));
+    	
     	while(scanner.hasNextLine()) {
 	    	line = scanner.nextLine();
 	    	lines.add(line);
     	}
     	scanner.close();
+    	
     	return lines;
     }
     
+    /**
+     * This method it's used for loading an existing save state of the game previously saved.
+     * @param fileName the name of the file.
+     * @return new Game(isRedTurn, firstTurn, redPlayer, yellowPlayer, board);
+     * @throws FileNotFoundException if the file name doesnt's exist.
+     */
     public static Game fromSaveState(String fileName) throws FileNotFoundException {
     	
+    	//Read the file.
     	ArrayList<String> lines = readLines(fileName);
+    	
+    	//Using fromSaveState(lines.get(x)) for getting redPlayer, yellowPlayer, and firstTurn.
     	Player redPlayer = Player.fromSaveState(lines.get(0));
     	Player yellowPlayer = Player.fromSaveState(lines.get(1));
     	boolean firstTurn = Boolean.parseBoolean(lines.get(2));
+    	
+    	/**
+    	 * Remove redPlayer, yellowPlayer, and firstTurn from lines, create the board
+    	 * and determinate if it' red or yellow player's turn. 
+    	 */
     	lines.remove(0);
     	lines.remove(0);
     	lines.remove(0);
     	Board board = Board.fromSaveState(lines);
     	boolean isRedTurn = board.evaluateTurn(firstTurn);
+    	
     	return new Game(isRedTurn, firstTurn, redPlayer, yellowPlayer, board);
-    	
-    	
     }
       
 }

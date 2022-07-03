@@ -11,8 +11,27 @@ import java.util.Scanner;
  */
 public class Main {
 	
+	/**
+	 * Create a new Scanner.
+	 */
 	private static Scanner scanner = new Scanner(System.in);
+	
+	/**
+	 * Displaying if there's a winner using game.run() or if it's a draw if winner is null.
+	 * @param game 
+	 */
+	private static void gameLoop(Game game) {
+		Player winner = game.run();
+        if(winner==null) {
+            System.out.println("It's a draw.");
+        } else {
+            System.out.println("Congratulations "+winner+", you win the game!");
+        }
+	}
 
+	/**
+	 * Starting a new game.
+	 */
 	private static void game() {
 		Game game = new Game();
         game.setUp();
@@ -20,6 +39,9 @@ public class Main {
         
 	}
 	
+	/**
+	 * Load a previous saved game.
+	 */
 	private static void load() {
 		Game game = null;
 		while(game == null) {
@@ -33,15 +55,9 @@ public class Main {
 		Main.gameLoop(game);
 	}
 	
-	private static void gameLoop(Game game) {
-		Player winner = game.run();
-        if(winner==null) {
-            System.out.println("It's a draw.");
-        } else {
-            System.out.println("Congratulations "+winner+", you win the game!");
-        }
-	}
-	
+	/**
+	 * Running all tests.
+	 */
 	private static void tests() {
 		System.out.println("Running all tests...");
 		BoardTester.test();
@@ -49,17 +65,21 @@ public class Main {
 		WinningSequenceTester.test();
 	}
 	
+	/**
+	 * Exit from the game.
+	 */
 	private static void exit() {
 		System.out.println("Goodbye!");
 		System.exit(0);
 	}
+	
 	/**
 	 * The main method of the project.
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		Integer option = Menu.chooseOption();
+		//Run one of this case based on what the player has chosen.
 		switch(option) {
 			case 1:
 				Main.game();

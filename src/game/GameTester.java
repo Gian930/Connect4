@@ -101,6 +101,26 @@ public class GameTester {
 		System.out.println(isNotValid == false ? "PASSED" : "FAILED");
 	}
 	
+	/**
+	 * Check if the input in the menu is valid.
+	 * @param rawInput
+	 */
+	private static void menuInput(String rawInput) {
+		
+		try{
+	    	Integer playerInput = Integer.parseInt(rawInput);
+	    	if (playerInput >= 1 && playerInput <= 4) {
+	    		isNotValid = false; 
+	    	} else {
+	    		isNotValid = true;
+	    	}
+        } catch (NumberFormatException ex){
+			isNotValid = true;
+        }
+		
+		System.out.println(isNotValid ? "PASSED" : "FAILED");
+	}
+	
     /**
      * Simulate possible input from the player.
      */
@@ -124,6 +144,20 @@ public class GameTester {
 		GameTester.testFullColumnInput(1);
 		System.out.print("Save input case: ");
 		GameTester.isSaveInput("save filename");
+		System.out.print("Menu input; number greater than 4: ");
+		GameTester.menuInput("5");
+		System.out.print("Menu input; number smaller than 1: ");
+		GameTester.menuInput("0");
+		System.out.print("Menu input; lowercase letter: ");
+		GameTester.menuInput("y");
+		System.out.print("Menu input; capital letter: ");
+		GameTester.menuInput("X");
+		System.out.print("Menu input; space: ");
+		GameTester.isPassed("    ");
+		System.out.print("Menu input; an empty string: ");
+		GameTester.isPassed("");
+		System.out.print("Menu input; a symbol: ");
+		GameTester.isPassed("=");
 
 	}
 	
