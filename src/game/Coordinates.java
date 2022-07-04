@@ -3,7 +3,7 @@ package game;
 /**
  * Create the coordinates for winning sequence.
  * @author Gianmarco Caldaroni.
- *
+ * 
  */
 public class Coordinates {
 	

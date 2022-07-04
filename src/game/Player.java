@@ -32,7 +32,6 @@ public class Player implements Savable {
 		this.name = name;
 	}
 
-
     /**
      * Get the name of the player.
      * @return name

@@ -1,5 +1,6 @@
 package game;
 
+import java.io.CharConversionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,12 +46,19 @@ public class BoardTester {
 		//Take the array strings and returns it as a list.
 		List<String> lines =  Arrays.asList(strings);
 		//Put the list in the board.
-		Board board = new Board(new ArrayList<String>(lines));
+		Board board;
+		try {
+			board = new Board(new ArrayList<String>(lines));
+			
+			//For convenience player1 is always the winner and null it's for draw test case.
+			System.out.println(
+					board.checkWinner(player1, player2,winningSequence) == player1 || 
+					board.checkWinner(player1, player2,winningSequence) ==  null ? "PASSED" : "FAILED");
+			
+		} catch (CharConversionException e) {
+			//Unreachable code.
+		}
 		
-		//For convenience player1 is always the winner and null it's for draw test case.
-		System.out.println(
-				board.checkWinner(player1, player2,winningSequence) == player1 || 
-				board.checkWinner(player1, player2,winningSequence) ==  null ? "PASSED" : "FAILED");
 	}
 	
 	/**

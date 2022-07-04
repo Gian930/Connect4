@@ -3,7 +3,7 @@ package game;
 /**
  * Create the winning sequence.
  * @author Gianmarco Caldaroni.
- *
+ * 
  */
 public class WinningSequence {
 	
@@ -40,7 +40,7 @@ public class WinningSequence {
 	 * @param third
 	 * @param fourth
 	 */
-	public WinningSequence(Piece piece, Coordinates first, Coordinates second, Coordinates third, Coordinates fourth ) {
+	public WinningSequence(Piece piece, Coordinates first, Coordinates second, Coordinates third, Coordinates fourth) {
 		this.piece=piece;
 		this.first=first;
 		this.second=second;

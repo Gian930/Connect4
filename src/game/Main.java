@@ -1,5 +1,6 @@
 package game;
 
+import java.io.CharConversionException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -49,8 +50,12 @@ public class Main {
 			try {
 				game = Game.fromSaveState(Main.scanner.nextLine());
 			} catch (FileNotFoundException e) {
-				System.out.println("The choosen file doesn't exist.");
-			}
+				System.out.println("The chosen file doesn't exist.");
+			} catch (CharConversionException e) {
+				System.out.println("The board of the chosen file is not valid.");
+			} catch(IllegalArgumentException e) {
+				System.out.println("The save file is not valid.");
+			} 
 		}
 		Main.gameLoop(game);
 	}

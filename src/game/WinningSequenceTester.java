@@ -1,5 +1,6 @@
 package game;
 
+import java.io.CharConversionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,12 +45,16 @@ public class WinningSequenceTester {
 		WinningSequence winningSequence= new WinningSequence();
 		
 		List<String> lines =  Arrays.asList(strings);
-		Board board = new Board(new ArrayList<String>(lines));
+		Board board;
+		try {
+			board = new Board(new ArrayList<String>(lines));
+			
+			board.checkWinner(player1, player2, winningSequence);
+		} catch (CharConversionException e) {
+			//Unreachable code
+		}
 		
-		board.checkWinner(player1, player2, winningSequence);
-		
-		return winningSequence;
-		
+		return winningSequence;	
 	}
 	
 	/**
@@ -66,18 +71,25 @@ public class WinningSequenceTester {
 				"OOOO   "
 		};
 		
-		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(0,5);
-		Coordinates second = new Coordinates(1,5);
-		Coordinates third = new Coordinates(2,5);
-		Coordinates fourth = new Coordinates(3,5);
-		
-		//Expected winning sequence.
-		WinningSequence winningSequenceHorizontal = new WinningSequence(piece, first, second, third, fourth);
-		//Generate winning sequence with winningSequenceBuilder.
-		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
-		
-		System.out.println(winningSequence.equals(winningSequenceHorizontal) ? "PASSED" : "FAILED");
+		Piece piece;
+		try {
+			piece = Piece.fromCharacter('O');
+			Coordinates first = new Coordinates(0,5);
+			Coordinates second = new Coordinates(1,5);
+			Coordinates third = new Coordinates(2,5);
+			Coordinates fourth = new Coordinates(3,5);
+			
+			//Expected winning sequence.
+			WinningSequence winningSequenceHorizontal = new WinningSequence(piece, first, second, third, fourth);
+			
+			//Generate winning sequence with winningSequenceBuilder.
+			WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
+			
+			System.out.println(winningSequence.equals(winningSequenceHorizontal) ? "PASSED" : "FAILED");
+		} catch (CharConversionException e) {
+			//Unreachable code
+		}
+
 				
 	}
 
@@ -95,16 +107,22 @@ public class WinningSequenceTester {
 				"OXX    "
 		};
 		
-		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(0,2);
-		Coordinates second = new Coordinates(0,3);
-		Coordinates third = new Coordinates(0,4);
-		Coordinates fourth = new Coordinates(0,5);
-		
-		WinningSequence winningSequenceVertical = new WinningSequence(piece, first, second, third, fourth);
-		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
-		System.out.println(winningSequence.equals(winningSequenceVertical) ? "PASSED" : "FAILED");
-		
+		Piece piece;
+		try {
+			piece = Piece.fromCharacter('O');
+			
+			Coordinates first = new Coordinates(0,2);
+			Coordinates second = new Coordinates(0,3);
+			Coordinates third = new Coordinates(0,4);
+			Coordinates fourth = new Coordinates(0,5);
+			
+			WinningSequence winningSequenceVertical = new WinningSequence(piece, first, second, third, fourth);
+			WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
+			
+			System.out.println(winningSequence.equals(winningSequenceVertical) ? "PASSED" : "FAILED");
+		} catch (CharConversionException e) {
+			//Unreachable code
+		}
 	}
 	
 	/**
@@ -121,15 +139,23 @@ public class WinningSequenceTester {
 				"XOXOX X"
 		};
 		
-		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(0,2);
-		Coordinates second = new Coordinates(1,3);
-		Coordinates third = new Coordinates(2,4);
-		Coordinates fourth = new Coordinates(3,5);
-		
-		WinningSequence winningSequenceDiagonal = new WinningSequence(piece, first, second, third, fourth);
-		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
-		System.out.println(winningSequence.equals(winningSequenceDiagonal) ? "PASSED" : "FAILED");
+		Piece piece;
+		try {
+			piece = Piece.fromCharacter('O');
+			
+			Coordinates first = new Coordinates(0,2);
+			Coordinates second = new Coordinates(1,3);
+			Coordinates third = new Coordinates(2,4);
+			Coordinates fourth = new Coordinates(3,5);
+			
+			WinningSequence winningSequenceDiagonal = new WinningSequence(piece, first, second, third, fourth);
+			WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
+			
+			System.out.println(winningSequence.equals(winningSequenceDiagonal) ? "PASSED" : "FAILED");
+		} catch (CharConversionException e) {
+			//Unreachable code
+		}
+
 		
 	}
 	
@@ -147,15 +173,23 @@ public class WinningSequenceTester {
 				"OXOXOXX"
 		};
 		
-		Piece piece = Piece.fromCharacter('O');
-		Coordinates first = new Coordinates(3,2);
-		Coordinates second = new Coordinates(2,3);
-		Coordinates third = new Coordinates(1,4);
-		Coordinates fourth = new Coordinates(0,5);
-		
-		WinningSequence winningSequenceAntiDiagonal = new WinningSequence(piece, first, second, third, fourth);
-		WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
-		System.out.println(winningSequence.equals(winningSequenceAntiDiagonal) ? "PASSED" : "FAILED");
+		Piece piece;
+		try {
+			piece = Piece.fromCharacter('O');
+			
+			Coordinates first = new Coordinates(3,2);
+			Coordinates second = new Coordinates(2,3);
+			Coordinates third = new Coordinates(1,4);
+			Coordinates fourth = new Coordinates(0,5);
+			
+			WinningSequence winningSequenceAntiDiagonal = new WinningSequence(piece, first, second, third, fourth);
+			WinningSequence winningSequence = WinningSequenceTester.winningSequenceBuilder(strings);
+			
+			System.out.println(winningSequence.equals(winningSequenceAntiDiagonal) ? "PASSED" : "FAILED");
+		} catch (CharConversionException e) {
+			//Unreachable code
+		}
+
 		
 	}
 

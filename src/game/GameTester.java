@@ -1,5 +1,6 @@
 package game;
 
+import java.io.CharConversionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,14 +32,17 @@ public class GameTester {
 	 */
     private static void isPassed(String rawInput) {
     	try {
+    		
     		//Trying to parse playerInput in integer.
     		Integer playerInput = Integer.parseInt(rawInput);
+    		
     		//If it's a valid number, the boolean isValid is true and false otherwise. 
     		if(playerInput >= 1 && playerInput <= Board.getWidth()) {
     			isNotValid = false;
     		} else {
     			isNotValid = true;
     		} 
+    		
     		//If the input it's not a number, isValid is false.
     	} catch (NumberFormatException ex) {
     		isNotValid = true;	
@@ -64,15 +68,23 @@ public class GameTester {
 		};
 		
 		List<String> lines =  Arrays.asList(strings);
-		Board board = new Board(new ArrayList<String>(lines));
+		Board board;
 		
-		if(board.isColumnFull(playerInput)) {
-			isNotValid = true;
-		} else {
-			isNotValid = false;
+		try {
+			board = new Board(new ArrayList<String>(lines));
+			
+			if(board.isColumnFull(playerInput)) {
+				isNotValid = true;
+			} else {
+				isNotValid = false;
+			}
+			
+			System.out.println(isNotValid ? "PASSED" : "FAILED");
+			
+		} catch (CharConversionException e) {
+			//Unreachable code
 		}
-		
-		System.out.println(isNotValid ? "PASSED" : "FAILED");
+
 		
 	}
 	
@@ -85,15 +97,10 @@ public class GameTester {
 		if(rawInput.startsWith("save")) {
 			String[] args = rawInput.split(" ");
 			
-			/**
-			 * The input could be like:
-			 * - "save": this is incorrect because is missing file's name.
-			 * - "save filename other...": this is incorrect because there are too many arguments. 
-			 */
+
 			if(args.length < 2 || args.length > 2) {
 				isNotValid = true;
 			} else {
-				//In this case the input is valid because is like : "save filename".
 				isNotValid = false;
 			}
 		}
@@ -140,10 +147,13 @@ public class GameTester {
 		GameTester.isPassed("");
 		System.out.print("A symbol: ");
 		GameTester.isPassed("%");
+		
 		System.out.print("Full column input case: ");
 		GameTester.testFullColumnInput(1);
+		
 		System.out.print("Save input case: ");
 		GameTester.isSaveInput("save filename");
+		
 		System.out.print("Menu input; number greater than 4: ");
 		GameTester.menuInput("5");
 		System.out.print("Menu input; number smaller than 1: ");

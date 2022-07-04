@@ -1,5 +1,6 @@
 package game;
 
+import java.io.CharConversionException;
 import java.util.ArrayList;
 
 /**
@@ -54,8 +55,9 @@ public class Board implements Savable {
 	/**
 	 * Overload the constructor for BoardTester.
 	 * @param lines represents a particular status of the board.
+	 * @throws CharConversionException 
 	 */
-	public Board(ArrayList<String> lines) {
+	public Board(ArrayList<String> lines) throws CharConversionException {
 		for(int y=0; y<HEIGHT; y++) {
 			String line = lines.get(y);
 			for(int x=0; x<WIDTH; x++) {
@@ -366,8 +368,9 @@ public class Board implements Savable {
      * Create a board reading information from ArrayList lines.
      * @param lines
      * @return board
+     * @throws CharConversionException 
      */
-    public static Board fromSaveState(ArrayList<String> lines) {
+    public static Board fromSaveState(ArrayList<String> lines) throws CharConversionException {
     	
     	Piece[][] pieces = new Piece[HEIGHT][WIDTH]; 
     	for(int y=0; y<HEIGHT; y++){
@@ -395,7 +398,7 @@ public class Board implements Savable {
 	/**
 	 * Evaluate what turn it is based on who started the game (firstTurn).
 	 * @param firstTurn true or false.
-	 * @return 
+	 * @return firstTurn or true or false
 	 */
 	public Boolean evaluateTurn(boolean firstTurn) {
 		
@@ -428,7 +431,6 @@ public class Board implements Savable {
 		} else if (yellowCounter-redCounter == 1) {
 			return true;
 		} else {
-			// TODO creare eccezione
 			return null;
 		}
 		
@@ -437,6 +439,7 @@ public class Board implements Savable {
 	/**
 	 * Implements toSaveState() from Interface Savable.
 	 * Create the board for save file.
+	 * @return outputString
 	 */
 	@Override
     public String toSaveState() {
@@ -446,6 +449,7 @@ public class Board implements Savable {
              for(int x=0; x<WIDTH; x++) {
                  outputString.append(this.pieces[y][x]);
              }
+             
              //If it's the ultimate line we aren't appending "\n".
              if(y != HEIGHT-1) {
             	 outputString.append("\n");	 

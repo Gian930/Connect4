@@ -1,5 +1,6 @@
 package game;
 
+import java.io.CharConversionException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -185,29 +186,80 @@ public final class Game {
     	return playerInput;	
     }
     
+    /**
+     * Create commands for:
+     * -exit the game
+     * -save game
+     * @param rawInput
+     * @exception FileNotFoundException signals that an attempt to open the file denoted by a specified path name has failed. 
+     * @return true if rawInput is "quit", "exit" or "save filename" and false otherwise.
+     */
     private boolean parseCommand(String rawInput) {
-    	if(rawInput.startsWith("save")) {
+    	
+    	//Quit the game.
+    	if(rawInput.equals("quit") || rawInput.equals("exit")) {
+    		Game.clearScreen();
+    		System.out.println("Goodbye!");
+    		System.exit(0);
+    		
+    		//Save the game in a file.
+    	} else if(rawInput.startsWith("save")) {
     		String[] args = rawInput.split(" ");
+    		
+			 //The input could be like:
+			 //- "save": this is incorrect because is missing file's name.
+			 //- "save filename other...": this is incorrect because there are too many arguments. 
     		if(args.length < 2) {
     			System.out.println("Missing file name.");
     		} else if (args.length > 2) {
     			System.out.println("Too many arguments.");
+    			
+    		   //In this case the input is valid because is like : "save filename".
     		} else {
     			if(args[1].equals("-h") || args[1].equals("--help")) {
     				System.out.println("Save command usage: \n      save [filename] | [-h | --help]");
     			} else {
-    				// controllare caratteri particolari del nome del file.
-    				try {
-						this.saveSession(args[1]);
-					} catch (FileNotFoundException e) {
-						System.out.println("Something went wrong while saving the file.");
-					}
-    				System.out.println("File saved successfully in '"+args[1]+"'.");
+    				
+    				//Check if the file has a valid file name.
+    				if(Game.isValidFileName(args[1])) {
+    					try {
+    						this.saveSession(args[1]);
+    					} catch (FileNotFoundException e) {
+    						System.out.println("Something went wrong while saving the file.");
+    					}
+        				System.out.println("File saved successfully in '"+args[1]+"'.");	
+    				} else {
+    					System.out.println("There are invalid characters in the file name.");
+    				}
     			}
     		}
     		return true;
     	}
     	return false;
+    }
+    
+    /**
+     * Check if fileName has invalid character.
+     * @param fileName
+     * @return true if has invalid character and false otherwise.
+     */
+    private static boolean isValidFileName(String fileName) {
+    	
+    	for(int i = 0; i < fileName.length(); i++) {
+    		char character = fileName.charAt(i);
+    		
+    		//Based on character ASCII table:
+    		//If character is not between 0 and 9 
+    		if(!(character >= 48 && character <= 57 ||
+    				//If character is not in the alphabet (uppercase and lowercase letter).
+    				character >= 65 && character <= 90 || character >= 97 && character <= 122
+    				//If character is "." for extension.
+    				|| character == 46)) {
+    			return false;
+    			
+    		}
+    	}
+    	return true;
     }
     
     /**
@@ -246,7 +298,7 @@ public final class Game {
      * @return lines an ArrayList of string  
      * @throws FileNotFoundException if the file name doesnt's exist.
      */
-    private static ArrayList<String> readLines(String fileName) throws FileNotFoundException {
+    private static ArrayList<String> readLines(String fileName) throws FileNotFoundException, IllegalArgumentException {
     	
     	ArrayList<String> lines = new ArrayList<String>();
     	Scanner scanner;
@@ -260,7 +312,9 @@ public final class Game {
 	    	lines.add(line);
     	}
     	scanner.close();
-    	
+    	if(lines.size() != 9) {
+    		throw new IllegalArgumentException();
+    	}
     	return lines;
     }
     
@@ -269,8 +323,9 @@ public final class Game {
      * @param fileName the name of the file.
      * @return new Game(isRedTurn, firstTurn, redPlayer, yellowPlayer, board);
      * @throws FileNotFoundException if the file name doesnt's exist.
+     * @throws CharConversionException 
      */
-    public static Game fromSaveState(String fileName) throws FileNotFoundException {
+    public static Game fromSaveState(String fileName) throws FileNotFoundException, CharConversionException, IllegalArgumentException {
     	
     	//Read the file.
     	ArrayList<String> lines = readLines(fileName);
@@ -278,12 +333,14 @@ public final class Game {
     	//Using fromSaveState(lines.get(x)) for getting redPlayer, yellowPlayer, and firstTurn.
     	Player redPlayer = Player.fromSaveState(lines.get(0));
     	Player yellowPlayer = Player.fromSaveState(lines.get(1));
-    	boolean firstTurn = Boolean.parseBoolean(lines.get(2));
+    	String rawFirstTurn = lines.get(2);
+    	if(!rawFirstTurn.equals("true") && !rawFirstTurn.equals("false")) {
+    		throw new IllegalArgumentException();
+    	}
+    	Boolean firstTurn = Boolean.parseBoolean(lines.get(2));
     	
-    	/**
-    	 * Remove redPlayer, yellowPlayer, and firstTurn from lines, create the board
-    	 * and determinate if it' red or yellow player's turn. 
-    	 */
+        //Remove redPlayer, yellowPlayer and firstTurn from lines; create the board
+        //and determinate if it's red or yellow player's turn. 
     	lines.remove(0);
     	lines.remove(0);
     	lines.remove(0);

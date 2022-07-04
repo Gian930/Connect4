@@ -1,9 +1,1 @@
-T
-Y
-false
-   X   
-  XO   
-  XO   
-  XX   
- OOX   
- OOX   
+ 

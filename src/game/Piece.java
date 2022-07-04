@@ -1,10 +1,11 @@
 package game;
 
+import java.io.CharConversionException;
 
 /**
  * Pieces that can be in the board.
  * @author Gianmarco Caldaroni.
- *
+ * 
  */
 public enum Piece implements Savable {
 	
@@ -27,7 +28,7 @@ public enum Piece implements Savable {
 	 * @param character
 	 * @return yellow, red or empty based on what character is in the board.
 	 */
-	public static Piece fromCharacter(char character) {
+	public static Piece fromCharacter(char character) throws CharConversionException {
 		switch(character) {
 			case 'X':
 				return YELLOW;
@@ -36,7 +37,7 @@ public enum Piece implements Savable {
 			case ' ':
 				return EMPTY;
 			default:
-				return null;
+				throw new CharConversionException();
 		}
 	}
 	
