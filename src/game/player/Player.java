@@ -28,7 +28,7 @@ public class Player implements Savable {
     
     /**
      * Overload the empty constructor for fromSaveState().
-     * @param name
+     * @param name player's name.
      */
     public Player(String name) {
 		this.name = name;
@@ -44,7 +44,7 @@ public class Player implements Savable {
     
     /**
      * Set the name of the player.
-     * @param name
+     * @param name player's name.
      */
     public void setName(String name) {
         this.name = name;
@@ -60,8 +60,8 @@ public class Player implements Savable {
     
     /**
      * This method it's used for getting redPlayer and yellowPlayer in Game.fromSaveState.  
-     * @param input
-     * @return new Player(input)
+     * @param input the input.
+     * @return new Player(input).
      */
     public static Player fromSaveState(String input) {
     	return new Player(input);

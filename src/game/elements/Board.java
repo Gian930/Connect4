@@ -60,7 +60,7 @@ public class Board implements Savable {
 	/**
 	 * Overload the constructor for BoardTester.
 	 * @param lines represents a particular status of the board.
-	 * @throws CharConversionException 
+	 * @throws CharConversionException thrown when there is an invalid character in the board.
 	 */
 	public Board(ArrayList<String> lines) throws CharConversionException {
 		for(int y=0; y<HEIGHT; y++) {
@@ -112,8 +112,9 @@ public class Board implements Savable {
     
     /**
      * Check if there is a winner.
-     * @param redPlayer
-     * @param yellowPlayer
+     * @param redPlayer the red player.
+     * @param yellowPlayer the yellow player.
+     * @param winningSequence the winning sequence
      * @return winner: the red or yellow player if there are four pieces connected of that color, null otherwise.
      */
     public Player checkWinner(Player redPlayer, Player yellowPlayer, WinningSequence winningSequence) {
@@ -339,7 +340,7 @@ public class Board implements Savable {
     
     /**
      * Blink the winning sequence for the animation.
-     * @param winningSequence
+     * @param winningSequence the winning sequence.
      */
     public void blink(WinningSequence winningSequence) {
     	
@@ -371,9 +372,9 @@ public class Board implements Savable {
     
     /**
      * Create a board reading information from ArrayList lines.
-     * @param lines
-     * @return board
-     * @throws CharConversionException 
+     * @param lines lines of the file.
+     * @return board the board built from the file.
+     * @throws CharConversionException throw when there is an invalid character.
      */
     public static Board fromSaveState(ArrayList<String> lines) throws CharConversionException {
     	
@@ -394,7 +395,7 @@ public class Board implements Savable {
     
     /**
      * Set the pieces.
-     * @param pieces
+     * @param pieces the pieces.
      */
 	public void setPieces(Piece[][] pieces) {
 		this.pieces = pieces;

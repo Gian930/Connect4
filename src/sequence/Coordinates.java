@@ -19,8 +19,8 @@ public class Coordinates {
 	
 	/**
 	 * The constructor.
-	 * @param x
-	 * @param y
+	 * @param x the x component.
+	 * @param y the y component.
 	 */
 	public Coordinates(int x, int y) {
 		this.x=x;
@@ -37,7 +37,7 @@ public class Coordinates {
 	
 	/**
 	 * Set the x component.
-	 * @param x
+	 * @param x the x component.
 	 */
 	public void setX(int x) {
 		this.x = x;
@@ -53,7 +53,7 @@ public class Coordinates {
 	
 	/**
 	 * Set the y component.
-	 * @param y
+	 * @param y the y component.
 	 */
 	public void setY(int y) {
 		this.y = y;

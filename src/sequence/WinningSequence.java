@@ -36,11 +36,11 @@ public class WinningSequence {
 	
 	/**
 	 * The constructor.
-	 * @param piece
-	 * @param first
-	 * @param second
-	 * @param third
-	 * @param fourth
+	 * @param piece the winner piece.
+	 * @param first first coordinate.
+	 * @param second second coordinate.
+	 * @param third third coordinate.
+	 * @param fourth fourth coordinate.
 	 */
 	public WinningSequence(Piece piece, Coordinates first, Coordinates second, Coordinates third, Coordinates fourth) {
 		this.piece=piece;
@@ -65,7 +65,7 @@ public class WinningSequence {
 	
 	/**
 	 * Set the winner piece.
-	 * @param piece
+	 * @param piece the winner piece.
 	 */
 	public void setPiece(Piece piece) {
 		this.piece = piece;
@@ -73,7 +73,7 @@ public class WinningSequence {
 	
 	/**
 	 * Get first coordinate.
-	 * @return first
+	 * @return first 
 	 */
 	public Coordinates getFirst() {
 		return first;
@@ -81,7 +81,7 @@ public class WinningSequence {
 	
 	/**
 	 * Set first coordinate.
-	 * @param first
+	 * @param first the first coordinate.
 	 */
 	public void setFirst(Coordinates first) {
 		this.first = first;
@@ -97,7 +97,7 @@ public class WinningSequence {
 	
 	/**
 	 * Set second coordinate.
-	 * @param second
+	 * @param second the second coordinate.
 	 */
 	public void setSecond(Coordinates second) {
 		this.second = second;
@@ -105,7 +105,7 @@ public class WinningSequence {
 	
 	/**
 	 * Get third coordinate.
-	 * @return
+	 * @return third
 	 */
 	public Coordinates getThird() {
 		return third;
@@ -113,7 +113,7 @@ public class WinningSequence {
 	
 	/**
 	 * Set third coordinate.
-	 * @param third
+	 * @param third the third coordinate.
 	 */
 	public void setThird(Coordinates third) {
 		this.third = third;
@@ -121,7 +121,7 @@ public class WinningSequence {
 	
 	/**
 	 * Get fourth coordinate.
-	 * @return fourth
+	 * @return fourth 
 	 */
 	public Coordinates getFourth() {
 		return fourth;
@@ -129,7 +129,7 @@ public class WinningSequence {
 	
 	/**
 	 * Set the second coordinate.
-	 * @param fourth
+	 * @param fourth the fourth coordinate.
 	 */
 	public void setFourth(Coordinates fourth) {
 		this.fourth = fourth;

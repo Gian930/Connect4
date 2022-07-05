@@ -62,11 +62,11 @@ public final class Game {
     
     /**
      * Overload the constructor for fromSaveState method.
-     * @param isRedTurn
-     * @param firstTurn
-     * @param redPlayer
-     * @param yellowPlayer
-     * @param board
+     * @param isRedTurn true if it's red turn and false otherwise.
+     * @param firstTurn boolean that tell us if it's red or yellow turn.
+     * @param redPlayer the red player.
+     * @param yellowPlayer the yellow player.
+     * @param board the board.
      */
     public Game(boolean isRedTurn, boolean firstTurn, Player redPlayer, Player yellowPlayer, Board board) {
 		this.isRedTurn = isRedTurn;
@@ -207,6 +207,11 @@ public final class Game {
     		System.out.println("Goodbye!");
     		System.exit(0);
     		
+    		//Help command.
+    	} else if(rawInput.equals("-h") || rawInput.equals("--help")) {
+    		System.out.println("Save command usage: \n      save [filename] | [-h | --help]");
+    		return true;
+    		
     		//Save the game in a file.
     	} else if(rawInput.startsWith("save")) {
     		String[] args = rawInput.split(" ");
@@ -220,11 +225,7 @@ public final class Game {
     			System.out.println("Too many arguments.");
     			
     		   //In this case the input is valid because is like : "save filename".
-    		} else {
-    			if(args[1].equals("-h") || args[1].equals("--help")) {
-    				System.out.println("Save command usage: \n      save [filename] | [-h | --help]");
-    			} else {
-    				
+    		} else {	
     				//Check if the file has a valid file name.
     				if(Game.isValidFileName(args[1])) {
     					try {
@@ -236,7 +237,6 @@ public final class Game {
     				} else {
     					System.out.println("There are invalid characters in the file name.");
     				}
-    			}
     		}
     		return true;
     	}
@@ -328,7 +328,7 @@ public final class Game {
      * @param fileName the name of the file.
      * @return new Game(isRedTurn, firstTurn, redPlayer, yellowPlayer, board);
      * @throws FileNotFoundException if the file name doesnt's exist.
-     * @throws CharConversionException 
+     * @throws CharConversionException if there is an invalid character in the file name.
      */
     public static Game fromSaveState(String fileName) throws FileNotFoundException, CharConversionException, IllegalArgumentException {
     	

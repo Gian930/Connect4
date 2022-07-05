@@ -86,7 +86,7 @@ public class Main {
 	
 	/**
 	 * The main method of the project.
-	 * @param args
+	 * @param args an array of command-line arguments for the application.
 	 */
 	public static void main(String[] args) {
 		Integer option = Menu.chooseOption();

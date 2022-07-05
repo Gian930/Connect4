@@ -21,19 +21,19 @@ public class BoardTester {
 	 */
 	public static void test() {
 		
-		System.out.println("Running all horizontal tests: \n");
+		System.out.println("Running board horizontal tests: \n");
 		BoardTester.testHorizontal();
 		
-		System.out.println("\nRunning all vertical tests: \n");
+		System.out.println("\nRunning board vertical tests: \n");
 		BoardTester.testVertical();
 		
-		System.out.println("\nRunning all diagonal tests: \n");
+		System.out.println("\nRunning board diagonal tests: \n");
 		BoardTester.testDiagonal();
 		
-		System.out.println("\nRunning all anti-diagonal tests: \n");
+		System.out.println("\nRunning board anti-diagonal tests: \n");
 		BoardTester.testAntiDiagonal();
 		
-		System.out.print("\nRunning draw test: ");
+		System.out.print("\nRunning board draw test: ");
 		BoardTester.testDraw();
 	}
 	

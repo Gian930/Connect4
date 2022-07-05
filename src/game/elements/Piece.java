@@ -27,8 +27,9 @@ public enum Piece implements Savable {
     EMPTY;
     
 	/**
-	 * @param character
+	 * @param character the character that can be in the board.
 	 * @return yellow, red or empty based on what character is in the board.
+	 * @throws CharConversionException thrown when there is an invalid character in the board.
 	 */
 	public static Piece fromCharacter(char character) throws CharConversionException {
 		switch(character) {
