@@ -1,9 +1,13 @@
-package game;
+package tests;
 
 import java.io.CharConversionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import game.elements.Board;
+import game.player.Player;
+import sequence.WinningSequence;
 
 /**
  * This class BoardTester it's used for testing the program.

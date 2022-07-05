@@ -1,4 +1,4 @@
-package game;
+package sequence;
 
 /**
  * Create the coordinates for winning sequence.

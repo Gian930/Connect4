@@ -1,9 +1,15 @@
-package game;
+package tests;
 
 import java.io.CharConversionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import game.elements.Board;
+import game.elements.Piece;
+import game.player.Player;
+import sequence.Coordinates;
+import sequence.WinningSequence;
 
 /**
  * Test if the winning sequence generated is correct.

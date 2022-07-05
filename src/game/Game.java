@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import game.elements.Board;
+import game.elements.Piece;
+import game.player.Player;
+import sequence.WinningSequence;
+
 /**
  * This class Game it's used to initialize a new Connect 4 game.
  * @author Gianmarco Caldaroni.

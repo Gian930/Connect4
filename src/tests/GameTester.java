@@ -1,9 +1,11 @@
-package game;
+package tests;
 
 import java.io.CharConversionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import game.elements.Board;
 
 /**
  * Tester for player's input.

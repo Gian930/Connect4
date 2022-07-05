@@ -1,4 +1,6 @@
-package game;
+package sequence;
+
+import game.elements.Piece;
 
 /**
  * Create the winning sequence.
