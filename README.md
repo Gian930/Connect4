@@ -1,2 +1,2 @@
-# Progetto__Java
+# Connect 4
 

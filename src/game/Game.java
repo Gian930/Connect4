@@ -123,7 +123,9 @@ public final class Game {
     		winner = this.board.checkWinner(this.redPlayer, this.yellowPlayer, winningSequence);
     		this.isRedTurn = !this.isRedTurn;
     	}
-    	this.winningAnimation(winningSequence);
+    	if(winner != null) {    		
+    		this.winningAnimation(winningSequence);
+    	}
     	
         return winner;
     }
