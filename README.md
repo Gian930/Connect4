@@ -34,7 +34,7 @@ Connect 4 have some command line you can write during the game you may want to k
 - `save filename` it's the command you have to write if you want to save the match
 - `exit` of `quit` if you want to exit the program
 
-You don't have to knw anything else because for other things the programs tells you what to write in input.
+You don't have to know anything else because for other things the programs tells you what to write in input.
 
 ## 📖 Documentation
 
