@@ -1,6 +1,6 @@
 # Connect 4
 
-Connect 4 is a CLI program written in Java, which allows to play a simple game with the homonymous board game. If you want to see rules and curiosities, here's [this Wikipedia page](https://en.wikipedia.org/wiki/Connect_Four), or you can check my report "Relazione Forza 4.pdf".
+Connect 4 is a CLI program written in Java, which allows to play a simple game with the homonymous board game. If you want to see rules and curiosities, here's [this Wikipedia page](https://en.wikipedia.org/wiki/Connect_Four), or you can check my report "Relazione_Forza_4.pdf".
 
 ## 🚀 Features
 
